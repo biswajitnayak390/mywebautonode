@@ -89,8 +89,9 @@ export default function Home() {
     <>
       <main>
         {/* HERO */}
-<section className="hero-section" style={{ paddingTop: 20 }}>
-  <div className="container">
+        <section className="hero-section" style={{ paddingTop: 20 }}>
+          <div className="container">
+            <div className="row align-items-center g-5">
               <div className="col-lg-6">
                 <span className="eyebrow mb-3">
                   Enterprise Web, DXP & AI Solutions
