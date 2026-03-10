@@ -110,11 +110,10 @@ export default function Home() {
 
                 <div className="d-flex flex-wrap gap-3">
                   <button
-                    className="btn btn-brand-primary btn-lg"
-                    onClick={openModal}
                     type="button"
+                    className="btn btn-brand-primary btn-lg"
                   >
-                    Book a Discovery Call
+                    Free Website Review
                   </button>
 
                   <a href="#services" className="btn btn-brand-outline btn-lg">
@@ -359,12 +358,8 @@ export default function Home() {
                 digital transformation roadmap.
               </p>
 
-              <button
-                className="btn btn-brand-primary btn-lg"
-                onClick={openModal}
-                type="button"
-              >
-                Book a Discovery Call
+              <button type="button" className="btn btn-brand-primary btn-lg">
+                Free Website Review
               </button>
 
               <p className="mt-3 mb-0 text-muted">

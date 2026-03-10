@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SimpleChatBot from "@/components/SimpleChatbot";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
@@ -119,6 +120,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <SimpleChatBot />
       </body>
     </html>
   );
