@@ -22,8 +22,14 @@ export default function Header() {
         <div className="container">
           <nav className="navbar px-0 py-3" aria-label="Main navigation">
             <div className="d-flex align-items-center justify-content-between w-100 gap-3">
-              <Link href="/" className="navbar-brand brand-mark d-flex align-items-center gap-3 me-0" onClick={() => setMenuOpen(false)}>
-                <span className="brand-orb" aria-hidden="true">A</span>
+              <Link
+                href="/"
+                className="navbar-brand brand-mark d-flex align-items-center gap-3 me-0"
+                onClick={() => setMenuOpen(false)}
+              >
+                <span className="brand-orb" aria-hidden="true">
+                  A
+                </span>
                 <span>
                   <strong>AutonodeAI</strong>
                   <small>AI-Powered Digital Experience Engineering</small>
@@ -42,14 +48,20 @@ export default function Header() {
                 <span />
               </button>
 
-              <div className={`desktop-nav ms-auto d-none d-lg-flex align-items-center gap-4`}>
+              <div
+                className={`desktop-nav ms-auto d-none d-lg-flex align-items-center gap-4`}
+              >
                 {navItems.map((item) => (
-                  <Link key={item.href} href={item.href} className="nav-link nav-link-custom px-0">
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="nav-link nav-link-custom px-0"
+                  >
                     {item.label}
                   </Link>
                 ))}
-                <button className="btn btn-brand-primary" type="button" onClick={() => setOpen(true)}>
-                  Book a discovery call
+                <button type="button" className="btn btn-brand-primary btn-lg">
+                  Free Website Review
                 </button>
               </div>
             </div>
@@ -57,11 +69,23 @@ export default function Header() {
             {menuOpen ? (
               <div className="mobile-nav d-lg-none mt-3">
                 {navItems.map((item) => (
-                  <Link key={item.href} href={item.href} className="nav-link nav-link-custom px-0 py-2" onClick={() => setMenuOpen(false)}>
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="nav-link nav-link-custom px-0 py-2"
+                    onClick={() => setMenuOpen(false)}
+                  >
                     {item.label}
                   </Link>
                 ))}
-                <button className="btn btn-brand-primary mt-3 w-100" type="button" onClick={() => { setOpen(true); setMenuOpen(false); }}>
+                <button
+                  className="btn btn-brand-primary mt-3 w-100"
+                  type="button"
+                  onClick={() => {
+                    setOpen(true);
+                    setMenuOpen(false);
+                  }}
+                >
                   Book a discovery call
                 </button>
               </div>
