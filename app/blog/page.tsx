@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function BlogPage() {
   return (
     <main className="section-pad page-top-space">
@@ -6,11 +8,13 @@ export default function BlogPage() {
 
         <ul>
           <li>
-            <a href="/blog/sitecore-cms-guide">What is Sitecore CMS?</a>
+            <Link href="/blog/sitecore-cms-guide">What is Sitecore CMS?</Link>
           </li>
 
           <li>
-            <a href="/blog/ai-chatbot-websites">AI Chatbots for Websites</a>
+            <Link href="/blog/ai-chatbot-websites">
+              AI Chatbots for Websites
+            </Link>
           </li>
         </ul>
       </div>
