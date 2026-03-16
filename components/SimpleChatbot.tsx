@@ -55,9 +55,17 @@ export default function SimpleChatBot() {
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const messageIdRef = useRef(3);
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping, isOpen]);
+ useEffect(() => {
+   bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+
+   const handler = () => setIsOpen(true);
+
+   window.addEventListener("open-chatbot", handler);
+
+   return () => {
+     window.removeEventListener("open-chatbot", handler);
+   };
+ }, [messages, isTyping, isOpen]);
 
   const addBotMessage = (text: string, delay = 600) => {
     setIsTyping(true);
