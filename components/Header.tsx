@@ -1,15 +1,19 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import DiscoveryModal from './DiscoveryModal';
+import Link from "next/link";
+import { useState } from "react";
+import DiscoveryModal from "./DiscoveryModal";
 
 const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
-  { href: '/technologies', label: 'Platforms' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' }
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/sitecore-development", label: "Sitecore" },
+  { href: "/headless-cms-development", label: "Headless CMS" },
+  { href: "/ai-chatbot-development", label: "AI Chatbot" },
+  { href: "/technologies", label: "Platforms" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -30,6 +34,7 @@ export default function Header() {
                 <span className="brand-orb" aria-hidden="true">
                   A
                 </span>
+
                 <span>
                   <strong>AutonodeAI</strong>
                   <small>AI-Powered Digital Experience Engineering</small>
@@ -48,9 +53,8 @@ export default function Header() {
                 <span />
               </button>
 
-              <div
-                className={`desktop-nav ms-auto d-none d-lg-flex align-items-center gap-4`}
-              >
+              {/* Desktop Nav */}
+              <div className="desktop-nav ms-auto d-none d-lg-flex align-items-center gap-4">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
@@ -60,6 +64,7 @@ export default function Header() {
                     {item.label}
                   </Link>
                 ))}
+
                 <button
                   type="button"
                   className="btn btn-brand-primary btn-lg"
@@ -73,7 +78,8 @@ export default function Header() {
               </div>
             </div>
 
-            {menuOpen ? (
+            {/* Mobile Nav */}
+            {menuOpen && (
               <div className="mobile-nav d-lg-none mt-3">
                 {navItems.map((item) => (
                   <Link
@@ -85,18 +91,20 @@ export default function Header() {
                     {item.label}
                   </Link>
                 ))}
+
                 <button
                   className="btn btn-brand-primary mt-3 w-100"
                   type="button"
                   onClick={() => {
-                    setOpen(true);
+                    const event = new CustomEvent("open-chatbot");
+                    window.dispatchEvent(event);
                     setMenuOpen(false);
                   }}
                 >
-                  Book a discovery call
+                  Free Website Review
                 </button>
               </div>
-            ) : null}
+            )}
           </nav>
         </div>
       </header>
