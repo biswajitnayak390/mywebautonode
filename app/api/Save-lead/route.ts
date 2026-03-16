@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     return Response.json({ ok: true, message: "Lead saved successfully  " });
   } catch (error: any) {
     return Response.json(
-      { ok: false, message: error.message || "Failed to save lead" },
+      { ok: false, message: error.message || "Failed to save lead " },
       { status: 500 },
     );
   }
