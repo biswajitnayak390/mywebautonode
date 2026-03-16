@@ -40,11 +40,7 @@ export default function SimpleChatBot() {
   });
 
   const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: 1,
-      text: "Hi 👋 Welcome to AutonodeAI.",
-      sender: "bot",
-    },
+    { id: 1, text: "Hi 👋 Welcome to AutonodeAI.", sender: "bot" },
     {
       id: 2,
       text: "Would you like a free website review or discuss a project?",
@@ -55,19 +51,16 @@ export default function SimpleChatBot() {
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const messageIdRef = useRef(3);
 
- useEffect(() => {
-   bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
 
-   const handler = () => setIsOpen(true);
+    const handler = () => setIsOpen(true);
+    window.addEventListener("open-chatbot", handler);
 
-   window.addEventListener("open-chatbot", handler);
+    return () => window.removeEventListener("open-chatbot", handler);
+  }, [messages, isTyping]);
 
-   return () => {
-     window.removeEventListener("open-chatbot", handler);
-   };
- }, [messages, isTyping, isOpen]);
-
-  const addBotMessage = (text: string, delay = 600) => {
+  const addBotMessage = (text: string, delay = 500) => {
     setIsTyping(true);
 
     setTimeout(() => {
@@ -86,35 +79,28 @@ export default function SimpleChatBot() {
     ]);
   };
 
-  const openBot = () => setIsOpen(true);
-  const closeBot = () => setIsOpen(false);
+  const validateEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const startFlow = (type: "review" | "project") => {
-    addUserMessage(
-      type === "review"
-        ? "I want a free website review."
-        : "I want to discuss a project.",
-    );
+  const validateWebsite = (url: string) => url.includes(".") && url.length > 4;
 
-    setTimeout(() => {
-      addBotMessage("Great. Let’s start with your name.");
-      setStep("name");
-    }, 300);
-  };
-
-  const saveLead = async (finalLead: LeadData) => {
-    const response = await fetch("/api/save-lead", {
+  const saveLead = async (data: LeadData) => {
+    const res = await fetch("/api/save-lead", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(finalLead),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
 
-    const data = await response.json();
+    const text = await res.text();
 
-    if (!response.ok) {
-      throw new Error(data?.message || "Lead saving failed");
+    try {
+      const json = JSON.parse(text);
+
+      if (!res.ok) {
+        throw new Error(json?.message || "Lead saving failed");
+      }
+    } catch {
+      throw new Error("Server response invalid");
     }
   };
 
@@ -128,65 +114,84 @@ export default function SimpleChatBot() {
     if (step === "name") {
       setLead((prev) => ({ ...prev, name: value }));
       setStep("email");
-      addBotMessage("Thanks. What is your business email?");
+
+      addBotMessage("Nice to meet you! What is your business email?");
       return;
     }
 
     if (step === "email") {
-      if (!value.includes("@")) {
-        addBotMessage("Please enter a valid email address.");
+      if (!validateEmail(value)) {
+        addBotMessage("That email doesn't look correct. Please try again.");
         return;
       }
 
       setLead((prev) => ({ ...prev, email: value }));
       setStep("company");
-      addBotMessage("What is your company name?");
+
+      addBotMessage("Great. What is your company name?");
       return;
     }
 
     if (step === "company") {
       setLead((prev) => ({ ...prev, company: value }));
       setStep("website");
+
       addBotMessage("Please share your website URL.");
       return;
     }
 
     if (step === "website") {
+      if (!validateWebsite(value)) {
+        addBotMessage("Please enter a valid website URL.");
+        return;
+      }
+
       setLead((prev) => ({ ...prev, website: value }));
       setStep("message");
+
       addBotMessage("What would you like us to review or improve?");
       return;
     }
 
     if (step === "message") {
-      const finalLead = {
-        ...lead,
-        message: value,
-      };
+      const finalLead = { ...lead, message: value };
 
       try {
         await saveLead(finalLead);
 
         setStep("done");
 
-        addBotMessage(
-          "Thank you! Your request has been captured successfully.",
-        );
+        addBotMessage("✅ Your request has been captured successfully.");
 
         setTimeout(() => {
           addBotMessage(
             "Our team will review your website and contact you shortly.",
           );
-        }, 500);
-      } catch (error: any) {
-        addBotMessage("Something went wrong saving your request.");
+        }, 700);
+      } catch (err) {
+        addBotMessage(
+          "⚠️ Something went wrong saving your request. Please try again.",
+        );
       }
     }
   };
 
+  const startFlow = (type: "review" | "project") => {
+    addUserMessage(
+      type === "review"
+        ? "I want a free website review."
+        : "I want to discuss a project.",
+    );
+
+    setTimeout(() => {
+      addBotMessage("Great. Let’s start with your name.");
+      setStep("name");
+    }, 400);
+  };
+
   return (
     <>
-      <button onClick={openBot} className="autonode-chat-trigger">
+      <button onClick={() => setIsOpen(true)} className="autonode-chat-trigger">
         Free Website Review
       </button>
 
@@ -200,7 +205,10 @@ export default function SimpleChatBot() {
               </div>
             </div>
 
-            <button onClick={closeBot} className="autonode-chat-close">
+            <button
+              onClick={() => setIsOpen(false)}
+              className="autonode-chat-close"
+            >
               ×
             </button>
           </div>
@@ -268,7 +276,10 @@ export default function SimpleChatBot() {
 
           {step === "done" && (
             <div className="autonode-chat-done">
-              <button className="autonode-chat-send" onClick={closeBot}>
+              <button
+                className="autonode-chat-send"
+                onClick={() => setIsOpen(false)}
+              >
                 Close
               </button>
             </div>

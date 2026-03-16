@@ -379,7 +379,103 @@ export default function Home() {
             </div>
           </div>
         </section>
+        {/* BLOG / INSIGHTS */}
+        <section className="section-pad section-soft">
+          <div className="container">
+            <div className="text-center mb-5">
+              <span className="eyebrow mb-3">Insights</span>
 
+              <h2 className="section-title">Latest Articles & Guides</h2>
+
+              <p className="section-copy mx-auto" style={{ maxWidth: "760px" }}>
+                Learn about modern website development, enterprise CMS
+                platforms, AI integration, and digital experience engineering.
+              </p>
+            </div>
+
+            <div className="row g-4">
+              <div className="col-md-6 col-lg-4">
+                <a
+                  href="/blog/sitecore-cms-guide"
+                  className="service-card-light h-100 d-block text-start"
+                >
+                  <Image
+                    src="/images/workspace.jpg"
+                    width={600}
+                    height={420}
+                    alt="Sitecore CMS enterprise platform guide"
+                    className="card-thumb-light"
+                  />
+
+                  <div className="p-4">
+                    <h3 className="service-title mb-2">
+                      What is Sitecore CMS?
+                    </h3>
+
+                    <p className="card-copy-dark mb-0">
+                      A complete guide explaining Sitecore CMS, enterprise
+                      digital experience platforms, and why large organizations
+                      choose Sitecore.
+                    </p>
+                  </div>
+                </a>
+              </div>
+
+              <div className="col-md-6 col-lg-4">
+                <a
+                  href="/blog/ai-chatbot-websites"
+                  className="service-card-light h-100 d-block text-start"
+                >
+                  <Image
+                    src="/images/ai.jpg"
+                    width={600}
+                    height={420}
+                    alt="AI chatbot integration for websites"
+                    className="card-thumb-light"
+                  />
+
+                  <div className="p-4">
+                    <h3 className="service-title mb-2">
+                      How AI Chatbots Improve Website Conversion
+                    </h3>
+
+                    <p className="card-copy-dark mb-0">
+                      Discover how AI-powered chatbots help businesses capture
+                      leads, automate support, and increase website conversions.
+                    </p>
+                  </div>
+                </a>
+              </div>
+
+              <div className="col-md-6 col-lg-4">
+                <a
+                  href="/blog/headless-cms-guide"
+                  className="service-card-light h-100 d-block text-start"
+                >
+                  <Image
+                    src="/images/coding.jpg"
+                    width={600}
+                    height={420}
+                    alt="Headless CMS architecture and modern web development"
+                    className="card-thumb-light"
+                  />
+
+                  <div className="p-4">
+                    <h3 className="service-title mb-2">
+                      Headless CMS Explained
+                    </h3>
+
+                    <p className="card-copy-dark mb-0">
+                      Learn how headless CMS architecture enables faster
+                      websites, omnichannel delivery, and scalable digital
+                      platforms.
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
         {/* FAQ */}
         <section className="section-pad">
           <div className="container">
