@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       throw new Error("Failed to save lead to Google Sheets");
     }
 
-    return Response.json({ ok: true, message: "Lead saved successfully" });
+    return Response.json({ ok: true, message: "Lead saved successfully  " });
   } catch (error: any) {
     return Response.json(
       { ok: false, message: error.message || "Failed to save lead" },
