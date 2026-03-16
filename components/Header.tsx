@@ -60,7 +60,14 @@ export default function Header() {
                     {item.label}
                   </Link>
                 ))}
-                <button type="button" className="btn btn-brand-primary btn-lg">
+                <button
+                  type="button"
+                  className="btn btn-brand-primary btn-lg"
+                  onClick={() => {
+                    const event = new CustomEvent("open-chatbot");
+                    window.dispatchEvent(event);
+                  }}
+                >
                   Free Website Review
                 </button>
               </div>
