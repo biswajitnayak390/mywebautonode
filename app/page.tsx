@@ -112,6 +112,10 @@ export default function Home() {
                   <button
                     type="button"
                     className="btn btn-brand-primary btn-lg"
+                    onClick={() => {
+                      const event = new CustomEvent("open-chatbot");
+                      window.dispatchEvent(event);
+                    }}
                   >
                     Free Website Review
                   </button>
@@ -358,7 +362,14 @@ export default function Home() {
                 digital transformation roadmap.
               </p>
 
-              <button type="button" className="btn btn-brand-primary btn-lg">
+              <button
+                type="button"
+                className="btn btn-brand-primary btn-lg"
+                onClick={() => {
+                  const event = new CustomEvent("open-chatbot");
+                  window.dispatchEvent(event);
+                }}
+              >
                 Free Website Review
               </button>
 
