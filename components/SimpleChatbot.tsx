@@ -47,7 +47,7 @@ export default function SimpleChatBot() {
     },
     {
       id: 2,
-      text: "Would you like a free website review or want to discuss a project?",
+      text: "Would you like a free website review or discuss a project?",
       sender: "bot",
     },
   ]);
@@ -59,17 +59,13 @@ export default function SimpleChatBot() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping, isOpen]);
 
-  const addBotMessage = (text: string, delay = 700) => {
+  const addBotMessage = (text: string, delay = 600) => {
     setIsTyping(true);
 
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
-        {
-          id: messageIdRef.current++,
-          text,
-          sender: "bot",
-        },
+        { id: messageIdRef.current++, text, sender: "bot" },
       ]);
       setIsTyping(false);
     }, delay);
@@ -78,11 +74,7 @@ export default function SimpleChatBot() {
   const addUserMessage = (text: string) => {
     setMessages((prev) => [
       ...prev,
-      {
-        id: messageIdRef.current++,
-        text,
-        sender: "user",
-      },
+      { id: messageIdRef.current++, text, sender: "user" },
     ]);
   };
 
@@ -114,13 +106,13 @@ export default function SimpleChatBot() {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data?.message || "Failed to save lead");
+      throw new Error(data?.message || "Lead saving failed");
     }
   };
 
   const handleSend = async () => {
     const value = input.trim();
-    if (!value || isTyping) return;
+    if (!value) return;
 
     addUserMessage(value);
     setInput("");
@@ -133,6 +125,11 @@ export default function SimpleChatBot() {
     }
 
     if (step === "email") {
+      if (!value.includes("@")) {
+        addBotMessage("Please enter a valid email address.");
+        return;
+      }
+
       setLead((prev) => ({ ...prev, email: value }));
       setStep("company");
       addBotMessage("What is your company name?");
@@ -161,22 +158,27 @@ export default function SimpleChatBot() {
 
       try {
         await saveLead(finalLead);
+
         setStep("done");
+
         addBotMessage(
-          "Thank you. Your request has been captured successfully.",
+          "Thank you! Your request has been captured successfully.",
         );
+
         setTimeout(() => {
-          addBotMessage("We will review your website and contact you soon.");
-        }, 400);
+          addBotMessage(
+            "Our team will review your website and contact you shortly.",
+          );
+        }, 500);
       } catch (error: any) {
-        addBotMessage(error?.message || "Saving failed. Please try again.");
+        addBotMessage("Something went wrong saving your request.");
       }
     }
   };
 
   return (
     <>
-      <button type="button" onClick={openBot} className="autonode-chat-trigger">
+      <button onClick={openBot} className="autonode-chat-trigger">
         Free Website Review
       </button>
 
@@ -189,12 +191,8 @@ export default function SimpleChatBot() {
                 Website Review & Project Enquiry
               </div>
             </div>
-            <button
-              type="button"
-              onClick={closeBot}
-              className="autonode-chat-close"
-              aria-label="Close chat"
-            >
+
+            <button onClick={closeBot} className="autonode-chat-close">
               ×
             </button>
           </div>
@@ -216,14 +214,13 @@ export default function SimpleChatBot() {
             {step === "welcome" && (
               <div className="autonode-chat-actions">
                 <button
-                  type="button"
                   className="autonode-chip"
                   onClick={() => startFlow("review")}
                 >
                   Free Website Review
                 </button>
+
                 <button
-                  type="button"
                   className="autonode-chip"
                   onClick={() => startFlow("project")}
                 >
@@ -246,7 +243,6 @@ export default function SimpleChatBot() {
           {step !== "welcome" && step !== "done" && (
             <div className="autonode-chat-input-wrap">
               <input
-                type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your answer..."
@@ -255,11 +251,8 @@ export default function SimpleChatBot() {
                   if (e.key === "Enter") handleSend();
                 }}
               />
-              <button
-                type="button"
-                onClick={handleSend}
-                className="autonode-chat-send"
-              >
+
+              <button onClick={handleSend} className="autonode-chat-send">
                 Send
               </button>
             </div>
@@ -267,11 +260,7 @@ export default function SimpleChatBot() {
 
           {step === "done" && (
             <div className="autonode-chat-done">
-              <button
-                type="button"
-                className="autonode-chat-send"
-                onClick={closeBot}
-              >
+              <button className="autonode-chat-send" onClick={closeBot}>
                 Close
               </button>
             </div>
