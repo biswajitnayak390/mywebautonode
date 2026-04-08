@@ -1,33 +1,67 @@
+import { getDb } from "@/lib/mongodb";
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+    const name = String(body.name || "").trim();
+    const email = String(body.email || "").trim();
+    const company = String(body.company || "").trim();
+    const website = String(body.website || "").trim();
+    const message = String(body.message || "").trim();
 
-    if (!webhookUrl) {
+    if (!name || !email || !message) {
       return Response.json(
-        { ok: false, message: "Missing GOOGLE_SHEETS_WEBHOOK_URL" },
-        { status: 500 },
+        { ok: false, message: "Name, email, and message are required." },
+        { status: 400 },
       );
     }
 
-    const response = await fetch(webhookUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to save lead to Google Sheets");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return Response.json(
+        { ok: false, message: "Invalid email address." },
+        { status: 400 },
+      );
     }
 
-    return Response.json({ ok: true, message: "Lead saved successfully" });
-  } catch (error: any) {
+    if (
+      name.length > 100 ||
+      company.length > 150 ||
+      website.length > 200 ||
+      message.length > 3000
+    ) {
+      return Response.json(
+        { ok: false, message: "Input is too long." },
+        { status: 400 },
+      );
+    }
+
+    const db = await getDb();
+
+    const result = await db.collection("leads").insertOne({
+      name,
+      email,
+      company,
+      website,
+      message,
+      source: "chatbot",
+      createdAt: new Date(),
+    });
+
+    return Response.json({
+      ok: true,
+      message: "Lead saved successfully.",
+      id: result.insertedId.toString(),
+    });
+  } catch (error) {
+    console.error("Save lead error:", error);
+
     return Response.json(
-      { ok: false, message: error.message || "Failed to save lead" },
+      { ok: false, message: "Failed to save lead." },
       { status: 500 },
     );
   }
 }
+//qq9W9kj0KyeYPohT;
+//bn803521_db_user
