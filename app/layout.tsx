@@ -102,6 +102,7 @@ const organizationSchema = {
   ],
   sameAs: [],
 };
+  <Analytics />;
 
 export default function RootLayout({
   children,
