@@ -1,65 +1,26 @@
-import { getDb } from "@/lib/mongodb";
+import nodemailer from "nodemailer";
 
-export async function POST(request: Request) {
-  try {
-    const body = await request.json();
+type Lead = {
+  name: string;
+  email: string;
+  company: string;
+  website: string;
+  message: string;
+};
 
-    const name = String(body.name || "").trim();
-    const email = String(body.email || "").trim();
-    const company = String(body.company || "").trim();
-    const website = String(body.website || "").trim();
-    const message = String(body.message || "").trim();
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "contact@autonodeai.com";
 
-    if (!name || !email || !message) {
-      return Response.json(
-        { ok: false, message: "Name, email, and message are required." },
-        { status: 400 },
-      );
-    }
+function validateLead(body: Record<string, unknown>): Lead {
+  const lead = {
+    name: String(body.name || "").trim(),
+    email: String(body.email || "").trim(),
+    company: String(body.company || "").trim(),
+    website: String(body.website || "").trim(),
+    message: String(body.message || "").trim(),
+  };
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return Response.json(
-        { ok: false, message: "Invalid email address." },
-        { status: 400 },
-      );
-    }
-
-    if (
-      name.length > 100 ||
-      company.length > 150 ||
-      website.length > 200 ||
-      message.length > 3000
-    ) {
-      return Response.json(
-        { ok: false, message: "Input is too long." },
-        { status: 400 },
-      );
-    }
-
-    const db = await getDb();
-
-    const result = await db.collection("leads").insertOne({
-      name,
-      email,
-      company,
-      website,
-      message,
-      source: "chatbot",
-      createdAt: new Date(),
-    });
-
-    return Response.json({
-      ok: true,
-      message: "Lead saved successfully.",
-      id: result.insertedId.toString(),
-    });
-  } catch (error) {
-    console.error("Save lead error:", error);
-
-    return Response.json(
-      { ok: false, message: "Failed to save lead." },
-      { status: 500 },
-    );
+  if (!lead.name || !lead.email || !lead.message) {
+    throw new Error("Name, email, and message are required.");
   }
-}
+
+  if (!/^[^\
