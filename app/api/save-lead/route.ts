@@ -8,7 +8,8 @@ type Lead = {
   message: string;
 };
 
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "contact@autonodeai.com";
+const CONTACT_EMAIL =
+  process.env.CONTACT_EMAIL || "9biswajitnayak1@gmail.com";
 
 function validateLead(body: Record<string, unknown>): Lead {
   const lead = {
@@ -20,7 +21,3 @@ function validateLead(body: Record<string, unknown>): Lead {
   };
 
   if (!lead.name || !lead.email || !lead.message) {
-    throw new Error("Name, email, and message are required.");
-  }
-
-  if (!/^[^\
