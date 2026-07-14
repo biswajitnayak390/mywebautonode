@@ -1,5 +1,4 @@
 import nodemailer from "nodemailer";
-import { MongoClient } from "mongodb";
 
 export const runtime = "nodejs";
 
@@ -9,8 +8,6 @@ type Lead = {
   company: string;
   website: string;
   message: string;
-  source: string;
-  createdAt: Date;
 };
 
 const CONTACT_EMAIL =
@@ -18,4 +15,8 @@ const CONTACT_EMAIL =
 
 function validateLead(body: Record<string, unknown>): Lead {
   const lead: Lead = {
-    name: String(body.name || "").trim
+    name: String(body.name || "").trim(),
+    email: String(body.email || "").trim(),
+    company: String(body.company || "").trim(),
+    website: String(body.website || "").trim(),
+    message: String
