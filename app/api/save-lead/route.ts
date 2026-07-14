@@ -1,4 +1,7 @@
 import nodemailer from "nodemailer";
+import { MongoClient } from "mongodb";
+
+export const runtime = "nodejs";
 
 type Lead = {
   name: string;
@@ -6,18 +9,13 @@ type Lead = {
   company: string;
   website: string;
   message: string;
+  source: string;
+  createdAt: Date;
 };
 
 const CONTACT_EMAIL =
   process.env.CONTACT_EMAIL || "9biswajitnayak1@gmail.com";
 
 function validateLead(body: Record<string, unknown>): Lead {
-  const lead = {
-    name: String(body.name || "").trim(),
-    email: String(body.email || "").trim(),
-    company: String(body.company || "").trim(),
-    website: String(body.website || "").trim(),
-    message: String(body.message || "").trim(),
-  };
-
-  if (!lead.name || !lead.email || !lead.message) {
+  const lead: Lead = {
+    name: String(body.name || "").trim
