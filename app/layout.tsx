@@ -102,7 +102,6 @@ const organizationSchema = {
   ],
   sameAs: [],
 };
-  <Analytics />;
 
 export default function RootLayout({
   children,
@@ -122,6 +121,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <SimpleChatBot />
+        <Analytics />
       </body>
     </html>
   );
