@@ -5,9 +5,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SimpleChatBot from "@/components/SimpleChatbot";
 import { Analytics } from "@vercel/analytics/next";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://autonodeai.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default:
       "AutonodeAI | Sitecore, Headless CMS, AI & Modern Website Development",
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     "digital experience platform development",
   ],
   alternates: {
-    canonical: "/",
+    canonical: "./",
   },
   icons: {
     icon: [
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
       "AutonodeAI | Sitecore, Headless CMS, AI & Modern Website Development",
     description:
       "Professional websites, Sitecore and headless CMS implementation, AI automation, and technical SEO for brands that want to compete online.",
-    url: "https://autonodeai.com",
+    url: "./",
     siteName: "AutonodeAI",
     locale: "en_US",
     type: "website",
@@ -85,9 +86,9 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "AutonodeAI",
-  url: "https://autonodeai.com",
-  logo: "https://autonodeai.com/icon.png",
-  image: "https://autonodeai.com/images/hero.jpg",
+  url: SITE_URL,
+  logo: `${SITE_URL}/icon.png`,
+  image: `${SITE_URL}/images/hero.jpg`,
   email: "contact@autonodeai.com",
   description:
     "AutonodeAI builds modern websites, Sitecore and headless CMS solutions, AI-powered digital experiences, and technical SEO foundations.",

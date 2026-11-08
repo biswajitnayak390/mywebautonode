@@ -58,7 +58,7 @@ export default function Page() {
       <p>
         At{" "}
         <a
-          href="https://autonodeai.com"
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
         >

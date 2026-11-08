@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Sitecore and Headless CMS Guides",
+  description: "Articles about Sitecore, headless CMS, and AI chatbots for business websites.",
+};
 
 export default function BlogPage() {
   return (
@@ -12,7 +18,7 @@ export default function BlogPage() {
           </li>
 
           <li>
-            <Link href="/blog/ai-chatbot-websites">
+            <Link href="/ai-chatbot-websites">
               AI Chatbots for Websites
             </Link>
           </li>

@@ -2,18 +2,16 @@
 
 import { useState } from "react";
 
-const SITE_URL = "https://autonodeai.com";
-
 const navItems = [
-  { href: `${SITE_URL}/`, label: "Home" },
-  { href: `${SITE_URL}/services`, label: "Services" },
-  { href: `${SITE_URL}/sitecore-development`, label: "Sitecore" },
-  { href: `${SITE_URL}/headless-cms-development`, label: "Headless CMS" },
-  { href: `${SITE_URL}/ai-chatbot-development`, label: "AI Chatbot" },
-  { href: `${SITE_URL}/technologies`, label: "Platforms" },
-  { href: `${SITE_URL}/blog`, label: "Blog" },
-  { href: `${SITE_URL}/about`, label: "About" },
-  { href: `${SITE_URL}/contact`, label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/sitecore-development", label: "Sitecore" },
+  { href: "/headless-cms-development", label: "Headless CMS" },
+  { href: "/ai-chatbot-development", label: "AI Chatbot" },
+  { href: "/technologies", label: "Platforms" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -31,7 +29,7 @@ export default function Header() {
         <nav className="navbar px-0 py-3" aria-label="Main navigation">
           <div className="d-flex align-items-center justify-content-between w-100 gap-3">
             <a
-              href={`${SITE_URL}/`}
+              href="/"
               className="navbar-brand brand-mark d-flex align-items-center gap-3 me-0"
               onClick={() => setMenuOpen(false)}
             >

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "What Is Sitecore CMS? Features, Architecture and Use Cases",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     title: "What Is Sitecore CMS? A Practical Enterprise Guide",
     description:
       "Understand how Sitecore supports enterprise content management, personalization, headless architecture, multilingual delivery, and digital experience management.",
-    url: "https://autonodeai.com/blog/sitecore-cms-guide",
+    url: "/blog/sitecore-cms-guide",
     type: "article",
   },
 };
@@ -23,7 +24,7 @@ const articleSchema = {
     "A practical guide to Sitecore CMS, its architecture, enterprise capabilities, headless delivery, and common implementation scenarios.",
   author: { "@type": "Organization", name: "AutonodeAI" },
   publisher: { "@type": "Organization", name: "AutonodeAI" },
-  mainEntityOfPage: "https://autonodeai.com/blog/sitecore-cms-guide",
+  mainEntityOfPage: `${SITE_URL}/blog/sitecore-cms-guide`,
 };
 
 export default function SitecoreCmsGuidePage() {

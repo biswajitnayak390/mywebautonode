@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Sitecore Migration and XM Cloud Development",
+  description:
+    "Plan a move from Sitecore XP or XM to XM Cloud. Request a free initial review of your migration options, risks, and next steps.",
+};
 
 export default function Home() {
   return (
@@ -15,7 +22,7 @@ export default function Home() {
                 </span>
 
                 <h1 className="hero-title">
-                  Plan your next Sitecore migration with confidence
+                  Plan your move to Sitecore XM Cloud
                 </h1>
 
                 <p className="hero-text mb-4">
@@ -323,7 +330,7 @@ export default function Home() {
 
               <div className="col-md-6 col-lg-4">
                 <a
-                  href="/blog/ai-chatbot-websites"
+                  href="/ai-chatbot-websites"
                   className="service-card-light h-100 d-block text-start"
                 >
                   <Image
@@ -349,7 +356,7 @@ export default function Home() {
 
               <div className="col-md-6 col-lg-4">
                 <a
-                  href="/blog/headless-cms-guide"
+                  href="/headless-cms-development"
                   className="service-card-light h-100 d-block text-start"
                 >
                   <Image
@@ -362,7 +369,7 @@ export default function Home() {
 
                   <div className="p-4">
                     <h3 className="service-title mb-2">
-                      Headless CMS Explained
+                      Headless CMS Development
                     </h3>
 
                     <p className="card-copy-dark mb-0">
