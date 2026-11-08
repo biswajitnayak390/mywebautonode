@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Sitecore Development Services | Enterprise CMS Experts",
   description:
     "AutonodeAI provides enterprise Sitecore development including Sitecore XM Cloud, headless architecture, and digital experience platforms.",
+  alternates: { canonical: "/sitecore-development" },
 };
 
 export default function Page() {
@@ -48,6 +50,9 @@ export default function Page() {
           helps businesses manage large digital ecosystems with flexibility and
           control.
         </p>
+        <Link href="/sitecore-migration-review" className="btn btn-brand-primary my-3">
+          Request a free migration review
+        </Link>
       </div>
       <p>
         If you are planning to implement Sitecore or modernize your digital

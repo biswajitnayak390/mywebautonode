@@ -1,23 +1,26 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
+import LeadForm from "@/components/LeadForm";
 
 export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Contact AutonodeAI for websites, Sitecore development, headless CMS migration, AI integrations, and technical SEO support.'
+  title: "Contact",
+  description:
+    "Contact AutonodeAI about Sitecore, headless CMS migration, web development, or AI integrations.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
   return (
-    <main className="section-pad page-top-space">
+    <main className="section-pad section-soft">
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-lg-9">
+          <div className="col-lg-8">
             <div className="cta-banner">
               <span className="eyebrow mb-3">Contact</span>
-              <h1 className="section-title mb-3">Ready to discuss your website, Sitecore project, or CMS migration?</h1>
+              <h1 className="section-title mb-3">Tell us about your project</h1>
               <p className="section-copy mb-4">
-                Email contact@autonodeai.com or use the “Book a discovery call” button in the header to open the project enquiry form.
+                Share what you’re working on and where you need help.
               </p>
-              <a className="btn btn-brand-primary" href="mailto:contact@autonodeai.com">contact@autonodeai.com</a>
+              <LeadForm source="contact" />
             </div>
           </div>
         </div>

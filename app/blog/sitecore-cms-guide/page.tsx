@@ -110,8 +110,8 @@ export default function SitecoreCmsGuidePage() {
           <Link className="btn btn-dark me-3" href="/sitecore-development">
             Explore Sitecore Services
           </Link>
-          <Link className="btn btn-outline-dark" href="/contact">
-            Discuss a Project
+          <Link className="btn btn-outline-dark" href="/sitecore-migration-review">
+            Request a free migration review
           </Link>
         </div>
       </article>
