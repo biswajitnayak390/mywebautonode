@@ -1,90 +1,7 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
-
-type ContactForm = {
-  name: string;
-  email: string;
-  company: string;
-  message: string;
-};
+import Link from "next/link";
 
 export default function Home() {
-  const [form, setForm] = useState<ContactForm>({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isModalOpen]);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      setIsSubmitting(true);
-
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-
-      const data = await response.json().catch(() => null);
-
-      if (!response.ok) {
-        throw new Error(data?.message || "Failed to submit form");
-      }
-
-      alert("Thank you! Your discovery call request has been submitted.");
-
-      setForm({
-        name: "",
-        email: "",
-        company: "",
-        message: "",
-      });
-
-      closeModal();
-    } catch (error: any) {
-      alert(
-        error?.message ||
-          "Email sending is not configured yet. Add SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, and optionally CONTACT_TO_EMAIL in your environment variables.",
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <>
       <main>
@@ -94,31 +11,26 @@ export default function Home() {
             <div className="row align-items-center g-5">
               <div className="col-lg-6">
                 <span className="eyebrow mb-3">
-                  Enterprise Web, DXP & AI Solutions
+                  Sitecore & Headless CMS
                 </span>
 
                 <h1 className="hero-title">
-                  AI-Powered Digital Experience Engineering for Modern Brands
+                  Plan your next Sitecore migration with confidence
                 </h1>
 
                 <p className="hero-text mb-4">
-                  AutonodeAI helps businesses design, build, and scale modern
-                  websites, digital experience platforms, and AI-enabled
-                  customer journeys using Sitecore, WordPress, Contentful,
-                  React, Next.js, .NET, and headless CMS architecture.
+                  Moving from Sitecore XP or XM to XM Cloud? Start with a free
+                  review of your current setup, migration risks, and what to
+                  check before you scope the project.
                 </p>
 
                 <div className="d-flex flex-wrap gap-3">
-                  <button
-                    type="button"
+                  <Link
+                    href="/sitecore-migration-review"
                     className="btn btn-brand-primary btn-lg"
-                    onClick={() => {
-                      const event = new CustomEvent("open-chatbot");
-                      window.dispatchEvent(event);
-                    }}
                   >
-                    Free Website Review
-                  </button>
+                    Request a free migration review
+                  </Link>
 
                   <a href="#services" className="btn btn-brand-outline btn-lg">
                     Explore Services
@@ -357,25 +269,13 @@ export default function Home() {
                 className="section-copy mx-auto mb-4"
                 style={{ maxWidth: "760px" }}
               >
-                Book a discovery call to discuss your website redesign, Sitecore
-                implementation, headless CMS strategy, AI integration, or
-                digital transformation roadmap.
+                Share what you want to build, improve, or migrate. We’ll follow
+                up by email to discuss next steps.
               </p>
 
-              <button
-                type="button"
-                className="btn btn-brand-primary btn-lg"
-                onClick={() => {
-                  const event = new CustomEvent("open-chatbot");
-                  window.dispatchEvent(event);
-                }}
-              >
-                Free Website Review
-              </button>
-
-              <p className="mt-3 mb-0 text-muted">
-                Free 30-minute consultation for your project requirements.
-              </p>
+              <Link href="/contact" className="btn btn-brand-primary btn-lg">
+                Discuss your project
+              </Link>
             </div>
           </div>
         </section>
@@ -534,9 +434,8 @@ export default function Home() {
                     How do I get started with AutonodeAI?
                   </h3>
                   <p className="card-copy-dark mb-0">
-                    Simply book a discovery call and share your project goals.
-                    We will discuss the right technical approach, platform
-                    choice, timeline, and next steps.
+                    Send us a short note about your project goals. We’ll follow
+                    up to discuss the platform, approach, and next steps.
                   </p>
                 </div>
               </div>
@@ -544,100 +443,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      {/* REACT MODAL */}
-      {isModalOpen && (
-        <div className="modal-shell" role="dialog" aria-modal="true">
-          <div className="modal-backdrop-custom" onClick={closeModal}></div>
-
-          <div className="modal-panel">
-            <div className="d-flex justify-content-between align-items-start gap-3 mb-3">
-              <div>
-                <h5 className="modal-title-custom mb-2">
-                  Book a Discovery Call
-                </h5>
-                <p className="mb-0 text-muted">
-                  Tell us about your website, CMS, DXP, or AI project.
-                </p>
-              </div>
-
-              <button
-                type="button"
-                onClick={closeModal}
-                aria-label="Close"
-                style={{
-                  border: "none",
-                  background: "transparent",
-                  fontSize: "28px",
-                  lineHeight: 1,
-                  color: "#667085",
-                  cursor: "pointer",
-                }}
-              >
-                ×
-              </button>
-            </div>
-
-            <form onSubmit={submitForm}>
-              <div className="row g-3">
-                <div className="col-md-6">
-                  <input
-                    name="name"
-                    placeholder="Your Name"
-                    className="form-control"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="col-md-6">
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="Business Email"
-                    className="form-control"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="col-12">
-                  <input
-                    name="company"
-                    placeholder="Company Name"
-                    className="form-control"
-                    value={form.company}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="col-12">
-                  <textarea
-                    name="message"
-                    placeholder="Tell us about your project requirements"
-                    className="form-control"
-                    value={form.message}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="col-12 pt-2">
-                  <button
-                    className="btn btn-brand-primary w-100"
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Submitting..." : "Submit Request"}
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </>
   );
 }

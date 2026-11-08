@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Sitecore XM Cloud Development",
   description:
     "AutonodeAI builds modern composable digital experience platforms using Sitecore XM Cloud and headless architecture.",
+  alternates: { canonical: "/sitecore-xm-cloud-development" },
 };
 
 export default function Page() {
@@ -44,6 +46,9 @@ export default function Page() {
           Businesses benefit from improved performance, faster development
           cycles, and scalable digital experiences.
         </p>
+        <Link href="/sitecore-migration-review" className="btn btn-brand-primary my-3">
+          Request a free migration review
+        </Link>
       </div>
       <p>
         Organizations looking to adopt composable architecture and modern
