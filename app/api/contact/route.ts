@@ -44,7 +44,7 @@ export async function POST(request: Request) {
   const port = Number(process.env.SMTP_PORT || 587);
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
-  const toEmail = process.env.CONTACT_TO_EMAIL || "contact@autonodeai.com";
+  const toEmail = process.env.CONTACT_TO_EMAIL || process.env.CONTACT_EMAIL || "contact@autonodeai.com";
 
   if (!host || !user || !pass || !Number.isInteger(port) || port < 1 || port > 65535) {
     console.error("Contact form SMTP configuration is incomplete.");
