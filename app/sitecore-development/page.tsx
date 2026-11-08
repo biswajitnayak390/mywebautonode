@@ -58,7 +58,7 @@ export default function Page() {
         If you are planning to implement Sitecore or modernize your digital
         experience platform, the experts at{" "}
         <a
-          href="https://autonodeai.com"
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
         >
