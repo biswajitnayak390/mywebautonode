@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { SITE_URL } from "@/lib/site";
+import { ORGANIZATION_ID, SITE_NAME, SITE_URL } from "@/lib/site";
 
 type ArticleDetails = {
   path: string;
@@ -21,7 +21,7 @@ export function articleMetadata(article: ArticleDetails): Metadata {
       url: article.path,
       title: article.title,
       description: article.description,
-      siteName: "AutonodeAI",
+      siteName: SITE_NAME,
       publishedTime: article.published,
       modifiedTime: article.updated,
     },
@@ -51,7 +51,13 @@ export default function BlogArticle({
     headline: details.title,
     description: details.description,
     mainEntityOfPage: new URL(details.path, SITE_URL).href,
-    author: { "@type": "Organization", name: "AutonodeAI", url: new URL("/about", SITE_URL).href },
+    author: {
+      "@type": "Organization",
+      "@id": ORGANIZATION_ID,
+      name: SITE_NAME,
+      url: new URL("/about", SITE_URL).href,
+    },
+    publisher: { "@id": ORGANIZATION_ID },
     datePublished: details.published,
     dateModified: details.updated,
   };
@@ -66,12 +72,15 @@ export default function BlogArticle({
         <header className="mb-4">
           <Link href="/blog" className="text-link d-inline-block mb-3">All articles</Link>
           <h1 className="section-title">{details.title}</h1>
-          {date && (
-            <p className="text-muted mb-0">
-              {details.updated ? "Updated " : ""}
-              <time dateTime={date}>{displayDate}</time>
-            </p>
-          )}
+          <p className="text-muted mb-0">
+            By <Link href="/about">{SITE_NAME}</Link>
+            {date && (
+              <>
+                {" · "}{details.updated ? "Updated " : ""}
+                <time dateTime={date}>{displayDate}</time>
+              </>
+            )}
+          </p>
         </header>
         <div className="section-copy">{children}</div>
       </article>
