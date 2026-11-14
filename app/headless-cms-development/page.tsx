@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Headless CMS Development Services",
@@ -37,6 +38,13 @@ export default function Page() {
           <li>Modern frontend frameworks</li>
           <li>Scalable architecture</li>
         </ul>
+        <p>
+          Preparing for launch? Use the{" "}
+          <Link href="/blog/headless-cms-seo-checklist">
+            headless CMS SEO checklist for Next.js
+          </Link>{" "}
+          to check the pages search engines receive.
+        </p>
       </div>
     </main>
   );

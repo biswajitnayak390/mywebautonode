@@ -303,7 +303,7 @@ export default function Home() {
             <div className="row g-4">
               <div className="col-md-6 col-lg-4">
                 <a
-                  href="/blog/sitecore-cms-guide"
+                  href="/blog/sitecore-xm-cloud-migration-checklist"
                   className="service-card-light h-100 d-block text-start"
                 >
                   <Image
@@ -316,13 +316,12 @@ export default function Home() {
 
                   <div className="p-4">
                     <h3 className="service-title mb-2">
-                      What is Sitecore CMS?
+                      Sitecore XP to XM Cloud Migration Checklist
                     </h3>
 
                     <p className="card-copy-dark mb-0">
-                      A complete guide explaining Sitecore CMS, enterprise
-                      digital experience platforms, and why large organizations
-                      choose Sitecore.
+                      Assess what to migrate, test a pilot, and protect traffic
+                      and enquiry forms before launch.
                     </p>
                   </div>
                 </a>
@@ -343,12 +342,12 @@ export default function Home() {
 
                   <div className="p-4">
                     <h3 className="service-title mb-2">
-                      How AI Chatbots Improve Website Conversion
+                      How to Use a Website Chatbot to Capture Qualified Leads
                     </h3>
 
                     <p className="card-copy-dark mb-0">
-                      Discover how AI-powered chatbots help businesses capture
-                      leads, automate support, and increase website conversions.
+                      Plan what to ask, how to hand off an enquiry, and how to
+                      measure qualified leads.
                     </p>
                   </div>
                 </a>
@@ -356,7 +355,7 @@ export default function Home() {
 
               <div className="col-md-6 col-lg-4">
                 <a
-                  href="/headless-cms-development"
+                  href="/blog/headless-cms-seo-checklist"
                   className="service-card-light h-100 d-block text-start"
                 >
                   <Image
@@ -369,13 +368,12 @@ export default function Home() {
 
                   <div className="p-4">
                     <h3 className="service-title mb-2">
-                      Headless CMS Development
+                      Headless CMS SEO Checklist for Next.js
                     </h3>
 
                     <p className="card-copy-dark mb-0">
-                      Learn how headless CMS architecture enables faster
-                      websites, omnichannel delivery, and scalable digital
-                      platforms.
+                      Check the rendered pages, redirects, language URLs, and
+                      sitemap before a headless CMS launch.
                     </p>
                   </div>
                 </a>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
 
 const title = "Free Sitecore Migration Review";
@@ -38,6 +39,11 @@ export default function SitecoreMigrationReviewPage() {
             </ul>
             <p className="mb-0">
               For website owners and agency teams planning a Sitecore migration.
+              Use our{" "}
+              <Link href="/blog/sitecore-xm-cloud-migration-checklist">
+                migration checklist
+              </Link>{" "}
+              to see what to prepare before a review.
             </p>
           </div>
           <section className="col-lg-6" aria-labelledby="review-request-title">

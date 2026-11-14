@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "AI Chatbot Development Services",
@@ -30,7 +31,14 @@ export default function Page() {
 
         <p>
           Businesses using AI assistants can respond instantly to customer
-          queries, improve user experience, and increase conversions.
+          queries and route enquiries to the right team.
+        </p>
+        <p>
+          Read our guide to{" "}
+          <Link href="/ai-chatbot-websites">
+            capturing qualified leads with a website chatbot
+          </Link>{" "}
+          to plan what your assistant should ask and how it should hand off.
         </p>
       </div>
     </main>
