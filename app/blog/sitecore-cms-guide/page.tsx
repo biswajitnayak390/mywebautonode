@@ -1,121 +1,103 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE_URL } from "@/lib/site";
+import BlogArticle, { articleMetadata } from "@/components/BlogArticle";
 
-export const metadata: Metadata = {
-  title: "What Is Sitecore CMS? Features, Architecture and Use Cases",
+const article = {
+  path: "/blog/sitecore-cms-guide",
+  title: "What Is Sitecore CMS? XP, XM, and XM Cloud Explained",
   description:
-    "A practical guide to Sitecore CMS, including its architecture, content management capabilities, personalization, headless delivery, XM Cloud, and enterprise use cases.",
-  alternates: { canonical: "/blog/sitecore-cms-guide" },
-  openGraph: {
-    title: "What Is Sitecore CMS? A Practical Enterprise Guide",
-    description:
-      "Understand how Sitecore supports enterprise content management, personalization, headless architecture, multilingual delivery, and digital experience management.",
-    url: "/blog/sitecore-cms-guide",
-    type: "article",
-  },
+    "Compare Sitecore XP, XM, and XM Cloud (SitecoreAI). See how content authoring and headless delivery work and what changes during a migration.",
+  updated: "2026-11-14",
 };
 
-const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "What Is Sitecore CMS? Features, Architecture and Use Cases",
-  description:
-    "A practical guide to Sitecore CMS, its architecture, enterprise capabilities, headless delivery, and common implementation scenarios.",
-  author: { "@type": "Organization", name: "AutonodeAI" },
-  publisher: { "@type": "Organization", name: "AutonodeAI" },
-  mainEntityOfPage: `${SITE_URL}/blog/sitecore-cms-guide`,
-};
+export const metadata = articleMetadata(article);
 
 export default function SitecoreCmsGuidePage() {
   return (
-    <main className="section-pad page-top-space">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <article className="container" style={{ maxWidth: 900 }}>
-        <p className="text-uppercase fw-semibold">Sitecore Guide</p>
-        <h1 className="section-title">What Is Sitecore CMS?</h1>
-        <p className="lead">
-          Sitecore is an enterprise digital experience platform used to manage,
-          deliver, and optimize content across websites, applications, and other
-          digital channels. It is commonly selected by organizations that need
-          strong governance, multilingual publishing, personalization,
-          integrations, and scalable content operations.
-        </p>
+    <BlogArticle details={article}>
+      <p className="lead">
+        Sitecore gives editors a place to model, translate, preview, and publish
+        content for one or more websites. If your team is evaluating a migration,
+        first identify which Sitecore product serves the site and which business
+        functions depend on it.
+      </p>
 
-        <h2>What does Sitecore do?</h2>
-        <p>
-          At its core, Sitecore gives marketing and content teams a structured
-          way to create pages, manage reusable content, control publishing, and
-          support multiple websites and languages. Developers use its APIs,
-          rendering models, templates, workflows, and integration capabilities
-          to build enterprise-grade digital experiences.
-        </p>
+      <h2 className="h4 mt-4">Compare Sitecore XP, XM, and XM Cloud</h2>
+      <div className="table-responsive mb-4">
+        <table className="table table-bordered mb-0">
+          <caption className="visually-hidden">Sitecore product comparison</caption>
+          <thead className="table-light">
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">What it covers</th>
+              <th scope="col">What to check before a move</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Sitecore XP</th>
+              <td>Content management with experience data, analytics, and personalization.</td>
+              <td>Which campaigns, profiles, and xDB reports are still in use?</td>
+            </tr>
+            <tr>
+              <th scope="row">Sitecore XM</th>
+              <td>Content modeling, editing, and delivery for sites and languages.</td>
+              <td>Which templates, renderings, and integrations need to move?</td>
+            </tr>
+            <tr>
+              <th scope="row">XM Cloud</th>
+              <td>Sitecore’s SaaS content and page authoring product, now called SitecoreAI.</td>
+              <td>Who owns the headless frontend and how will editors preview and publish?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <h2>Key Sitecore CMS capabilities</h2>
-        <ul>
-          <li>Structured content modeling and reusable components</li>
-          <li>Multisite and multilingual content management</li>
-          <li>Editorial workflows, approvals, versioning, and publishing</li>
-          <li>Personalization and customer experience optimization</li>
-          <li>Headless content delivery with React and Next.js</li>
-          <li>Integration with CRM, commerce, analytics, search, and DAM tools</li>
-        </ul>
+      <h2 className="h4 mt-4">How editing and headless delivery fit together</h2>
+      <p>
+        Editors create content from templates and assemble pages with reusable
+        components. In a headless setup, the frontend can fetch published item and
+        layout data from Sitecore Experience Edge, then render the page in Next.js.
+        Editorial preview and the published site use separate delivery paths. Test
+        both when a page looks correct in the editor but is missing from the live site.
+      </p>
 
-        <h2>Sitecore XP, XM and XM Cloud</h2>
-        <p>
-          Sitecore XP combines content management with analytics,
-          personalization, and marketing capabilities. Sitecore XM focuses on
-          content management and delivery. XM Cloud is Sitecore's SaaS-first,
-          headless offering designed for modern frontend frameworks, cloud
-          deployment, and faster release cycles.
-        </p>
+      <h2 className="h4 mt-4">When does Sitecore make sense?</h2>
+      <p>
+        Sitecore is worth evaluating when multiple brands or regions need a shared
+        content model, separate publishing permissions, and consistent components.
+        For one small site, compare the cost and support effort against a simpler
+        CMS. Start with a real workflow, such as publishing a localized product page,
+        and see which platform your editors can operate confidently.
+      </p>
 
-        <h2>How Sitecore architecture works</h2>
-        <p>
-          Traditional Sitecore implementations often use ASP.NET MVC and
-          server-side rendering. Modern implementations increasingly use a
-          headless model, where Sitecore manages content and a separate frontend
-          application consumes that content through layout and GraphQL APIs.
-          This separation allows teams to improve frontend performance,
-          deployment independence, and omnichannel reuse.
-        </p>
+      <h2 className="h4 mt-4">Where to start with an upgrade or migration</h2>
+      <p>
+        Pick one site and list the components, translations, redirects, forms, and
+        third-party integrations it depends on. Use the{" "}
+        <Link href="/blog/sitecore-xm-cloud-migration-checklist">
+          Sitecore XP to XM Cloud migration checklist
+        </Link>{" "}
+        to turn that inventory into a publishing pilot and a launch plan.
+      </p>
 
-        <h2>When is Sitecore a good fit?</h2>
-        <p>
-          Sitecore is well suited to organizations with complex editorial
-          workflows, multiple brands or markets, regulated content processes,
-          personalized customer journeys, and significant integration needs. It
-          may be more than a small business needs, but it is often a strong fit
-          for enterprise websites and digital transformation programs.
-        </p>
-
-        <h2>Sitecore implementation considerations</h2>
-        <p>
-          A successful implementation depends on clear information architecture,
-          reusable component design, content governance, performance planning,
-          security, accessibility, SEO, and a realistic migration strategy.
-          Teams should also define ownership for content workflows, analytics,
-          and ongoing platform operations.
-        </p>
-
-        <div className="mt-5 p-4 border rounded-4">
-          <h2>Need help with Sitecore?</h2>
-          <p>
-            AutonodeAI supports Sitecore development, upgrades, headless
-            migration, XM Cloud implementation, React and Next.js frontends,
-            technical SEO, and enterprise integration work.
-          </p>
-          <Link className="btn btn-dark me-3" href="/sitecore-development">
-            Explore Sitecore Services
-          </Link>
-          <Link className="btn btn-outline-dark" href="/sitecore-migration-review">
+      <div className="cta-banner mt-4">
+        <h2 className="h4">Review your Sitecore options</h2>
+        <p>Share your Sitecore version and what you want to change.</p>
+        <div className="d-flex flex-wrap gap-2">
+          <Link href="/sitecore-migration-review" className="btn btn-brand-primary">
             Request a free migration review
           </Link>
+          <Link href="/sitecore-development" className="btn btn-brand-outline">
+            Explore Sitecore development services
+          </Link>
         </div>
-      </article>
-    </main>
+      </div>
+      <p className="small mt-4 mb-0">
+        Reference{" "}
+        <a href="https://doc.sitecore.com/sai/en/developers/sitecoreai/experience-edge.html">
+          Sitecore Experience Edge documentation
+        </a>.
+      </p>
+    </BlogArticle>
   );
 }

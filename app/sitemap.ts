@@ -16,7 +16,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/ai-chatbot-websites',
     '/ai-modern-web-development',
     '/blog',
-    '/blog/sitecore-cms-guide'
+    '/blog/sitecore-cms-guide',
+    '/blog/sitecore-xm-cloud-migration-checklist',
+    '/blog/headless-cms-seo-checklist'
   ];
   return paths.map((path) => ({
     url: `${SITE_URL}${path}`,

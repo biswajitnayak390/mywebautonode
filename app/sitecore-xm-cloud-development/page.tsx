@@ -49,6 +49,13 @@ export default function Page() {
         <Link href="/sitecore-migration-review" className="btn btn-brand-primary my-3">
           Request a free migration review
         </Link>
+        <p>
+          Start with the{" "}
+          <Link href="/blog/sitecore-xm-cloud-migration-checklist">
+            Sitecore XP to XM Cloud migration checklist
+          </Link>{" "}
+          to scope your content, publishing, and launch work.
+        </p>
       </div>
       <p>
         Organizations looking to adopt composable architecture and modern
