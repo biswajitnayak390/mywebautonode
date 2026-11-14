@@ -1,16 +1,30 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ORGANIZATION_ID, SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Sitecore Migration and XM Cloud Development",
   description:
-    "Plan a move from Sitecore XP or XM to XM Cloud. Request a free initial review of your migration options, risks, and next steps.",
+    "AutonodeAI helps with Sitecore XM Cloud migrations, headless CMS development, and AI integrations. Request a free review of your migration plan.",
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  name: SITE_NAME,
+  url: `${SITE_URL}/`,
+  publisher: { "@id": ORGANIZATION_ID },
 };
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <main>
         {/* HERO */}
         <section className="hero-section" style={{ paddingTop: 20 }}>
@@ -26,9 +40,9 @@ export default function Home() {
                 </h1>
 
                 <p className="hero-text mb-4">
-                  Moving from Sitecore XP or XM to XM Cloud? Start with a free
-                  review of your current setup, migration risks, and what to
-                  check before you scope the project.
+                  AutonodeAI helps teams move from Sitecore XP or XM to XM Cloud.
+                  Start with a free review of your current setup, migration risks,
+                  and what to check before you scope the project.
                 </p>
 
                 <div className="d-flex flex-wrap gap-3">

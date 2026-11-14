@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SimpleChatBot from "@/components/SimpleChatbot";
 import { Analytics } from "@vercel/analytics/next";
-import { SITE_URL } from "@/lib/site";
+import { ORGANIZATION_ID, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -14,8 +14,7 @@ export const metadata: Metadata = {
       "AutonodeAI | Sitecore, Headless CMS, AI & Modern Website Development",
     template: "%s | AutonodeAI",
   },
-  description:
-    "AutonodeAI builds modern websites, Sitecore solutions, headless CMS platforms, WordPress builds, AI integrations, and technical SEO foundations for growth-focused brands.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "AutonodeAI",
     "Sitecore development company",
@@ -45,10 +44,9 @@ export const metadata: Metadata = {
   openGraph: {
     title:
       "AutonodeAI | Sitecore, Headless CMS, AI & Modern Website Development",
-    description:
-      "Professional websites, Sitecore and headless CMS implementation, AI automation, and technical SEO for brands that want to compete online.",
+    description: SITE_DESCRIPTION,
     url: "./",
-    siteName: "AutonodeAI",
+    siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
     images: [
@@ -64,8 +62,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title:
       "AutonodeAI | Sitecore, Headless CMS, AI & Modern Website Development",
-    description:
-      "Modern websites, Sitecore CMS, headless platforms, AI features, and technical SEO for growth-focused brands.",
+    description: SITE_DESCRIPTION,
     images: ["/images/hero.jpg"],
   },
   robots: {
@@ -85,13 +82,13 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "AutonodeAI",
-  url: SITE_URL,
+  "@id": ORGANIZATION_ID,
+  name: SITE_NAME,
+  url: `${SITE_URL}/`,
   logo: `${SITE_URL}/icon.png`,
   image: `${SITE_URL}/images/hero.jpg`,
   email: "contact@autonodeai.com",
-  description:
-    "AutonodeAI builds modern websites, Sitecore and headless CMS solutions, AI-powered digital experiences, and technical SEO foundations.",
+  description: SITE_DESCRIPTION,
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -101,7 +98,6 @@ const organizationSchema = {
       availableLanguage: ["English"],
     },
   ],
-  sameAs: [],
 };
 
 export default function RootLayout({

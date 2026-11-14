@@ -10,8 +10,9 @@ type Lead = {
   message: string;
 };
 
-const CONTACT_EMAIL =
-  process.env.CONTACT_EMAIL || "9biswajitnayak1@gmail.com";
+class LeadValidationError extends Error {}
+
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "contact@autonodeai.com";
 
 function validateLead(body: Record<string, unknown>): Lead {
   const lead: Lead = {
@@ -23,11 +24,11 @@ function validateLead(body: Record<string, unknown>): Lead {
   };
 
   if (!lead.name || !lead.email || !lead.message) {
-    throw new Error("Name, email, and message are required.");
+    throw new LeadValidationError("Name, email, and message are required.");
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) {
-    throw new Error("Invalid email address.");
+    throw new LeadValidationError("Invalid email address.");
   }
 
   if (
@@ -36,7 +37,7 @@ function validateLead(body: Record<string, unknown>): Lead {
     lead.website.length > 200 ||
     lead.message.length > 3000
   ) {
-    throw new Error("Input is too long.");
+    throw new LeadValidationError("Input is too long.");
   }
 
   return lead;
@@ -97,18 +98,15 @@ export async function POST(request: Request) {
       message: "Lead sent successfully.",
     });
   } catch (error) {
-    console.error("Save lead error:", error);
+    if (error instanceof LeadValidationError) {
+      return Response.json({ ok: false, message: error.message }, { status: 400 });
+    }
 
-    const message =
-      error instanceof Error ? error.message : "Failed to send lead.";
+    console.error("Save lead delivery failed.", (error as NodeJS.ErrnoException | null)?.code);
 
-    const status =
-      message.includes("required") ||
-      message.includes("Invalid") ||
-      message.includes("too long")
-        ? 400
-        : 500;
-
-    return Response.json({ ok: false, message }, { status });
+    return Response.json(
+      { ok: false, message: "Unable to send your request right now." },
+      { status: 500 },
+    );
   }
 }
