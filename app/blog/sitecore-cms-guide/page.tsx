@@ -6,6 +6,7 @@ const article = {
   title: "What Is Sitecore CMS? XP, XM, and XM Cloud Explained",
   description:
     "Compare Sitecore XP, XM, and XM Cloud (SitecoreAI). See how content authoring and headless delivery work and what changes during a migration.",
+  published: "2026-07-15",
   updated: "2026-11-15",
 };
 
