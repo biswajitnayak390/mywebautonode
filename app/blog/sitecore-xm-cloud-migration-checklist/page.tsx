@@ -7,6 +7,7 @@ const article = {
   description:
     "Plan a move from Sitecore XP or XM to XM Cloud. Inventory content, test a pilot on Experience Edge, and protect forms, redirects, and multilingual SEO.",
   published: "2026-11-14",
+  updated: "2026-11-15",
 };
 
 export const metadata = articleMetadata(article);
@@ -61,6 +62,10 @@ export default function MigrationChecklistPage() {
         Name an owner for routing, publishing, analytics, and lead delivery. Before
         cutover, agree on the checks that must pass, the problems that justify a rollback,
         and the steps to return traffic to the previous site.
+      </p>
+      <p>
+        Use your pilot results to plan the engineering and launch work.{" "}
+        <Link href="/blog/sitecore-xm-cloud-migration-estimate">How to estimate a Sitecore XM Cloud migration</Link>
       </p>
 
       <div className="cta-banner mt-4">
