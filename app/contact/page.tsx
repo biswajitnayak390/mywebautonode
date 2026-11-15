@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
+import { sitePageMetadata } from "@/lib/site";
 import LeadForm from "@/components/LeadForm";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Contact AutonodeAI about Sitecore, headless CMS migration, web development, or AI integrations.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata = sitePageMetadata(
+  "/contact",
+  "Discuss a Sitecore or Headless CMS Project",
+  "Tell AutonodeAI about a Sitecore migration, headless CMS build, Next.js website, or AI integration. Share your goals and the main decision you need help with.",
+);
 
 export default function ContactPage() {
   return (

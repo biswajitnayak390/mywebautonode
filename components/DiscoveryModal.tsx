@@ -70,7 +70,7 @@ export default function DiscoveryModal({ open, onClose }: Props) {
           <div>
             <span className="eyebrow">Discovery call</span>
             <h2 id="discovery-title" className="modal-title-custom mt-2 mb-2">Tell us about your project</h2>
-            <p className="text-secondary mb-0">Share your goals and we’ll respond at contact@autonodeai.com.</p>
+            <p className="text-secondary mb-0">Share your goals and the best address for following up.</p>
           </div>
           <button className="btn-close shadow-none" type="button" aria-label="Close" onClick={onClose} />
         </div>

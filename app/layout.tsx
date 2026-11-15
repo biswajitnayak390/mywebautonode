@@ -15,32 +15,10 @@ export const metadata: Metadata = {
     template: "%s | AutonodeAI",
   },
   description: SITE_DESCRIPTION,
-  keywords: [
-    "AutonodeAI",
-    "Sitecore development company",
-    "Sitecore CMS services",
-    "headless CMS development",
-    "WordPress website agency",
-    "Contentful development",
-    "Strapi development",
-    "Next.js web development",
-    ".NET development services",
-    "AI website automation",
-    "technical SEO services",
-    "digital experience platform development",
-  ],
   alternates: {
     canonical: "./",
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/icon.png", type: "image/png", sizes: "32x32" },
-      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
-    ],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: ["/favicon.ico"],
-  },
+  manifest: "/site.webmanifest",
   openGraph: {
     title:
       "AutonodeAI | Sitecore, Headless CMS, AI & Modern Website Development",
@@ -87,13 +65,12 @@ const organizationSchema = {
   url: `${SITE_URL}/`,
   logo: `${SITE_URL}/icon.png`,
   image: `${SITE_URL}/images/hero.jpg`,
-  email: "contact@autonodeai.com",
   description: SITE_DESCRIPTION,
   contactPoint: [
     {
       "@type": "ContactPoint",
       contactType: "sales",
-      email: "contact@autonodeai.com",
+      url: SITE_URL + "/contact",
       areaServed: "Worldwide",
       availableLanguage: ["English"],
     },

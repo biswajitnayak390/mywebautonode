@@ -3,7 +3,7 @@ import { SITE_URL } from '@/lib/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
-    '',
+    '/',
     '/services',
     '/technologies',
     '/about',
@@ -17,12 +17,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/ai-modern-web-development',
     '/blog',
     '/blog/sitecore-cms-guide',
+    '/blog/sitecore-nextjs-published-page-404',
     '/blog/sitecore-xm-cloud-migration-checklist',
     '/blog/headless-cms-seo-checklist'
   ];
   return paths.map((path) => ({
-    url: `${SITE_URL}${path}`,
-    changeFrequency: 'monthly' as const,
-    priority: path === '' ? 1 : 0.8
+    url: path === '/' ? SITE_URL : new URL(path, SITE_URL).href
   }));
 }

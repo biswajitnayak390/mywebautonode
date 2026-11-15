@@ -1,19 +1,9 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
+import { SITE_DESCRIPTION, sitePageMetadata } from "@/lib/site";
+import { halfContainerImageSizes } from "@/lib/image-sizes";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: SITE_DESCRIPTION,
-  openGraph: {
-    title: "About AutonodeAI",
-    description: SITE_DESCRIPTION,
-    url: "/about",
-    siteName: SITE_NAME,
-    type: "website",
-  },
-};
+export const metadata = sitePageMetadata("/about", "About", SITE_DESCRIPTION);
 
 export default function AboutPage() {
   return (
@@ -37,6 +27,7 @@ export default function AboutPage() {
               alt="Workstation and devices used to test websites"
               width={1200}
               height={900}
+              sizes={halfContainerImageSizes}
               className="content-image"
             />
           </div>

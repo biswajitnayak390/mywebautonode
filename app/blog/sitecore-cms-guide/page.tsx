@@ -58,7 +58,9 @@ export default function SitecoreCmsGuidePage() {
         components. In a headless setup, the frontend can fetch published item and
         layout data from Sitecore Experience Edge, then render the page in Next.js.
         Editorial preview and the published site use separate delivery paths. Test
-        both when a page looks correct in the editor but is missing from the live site.
+        both when a page looks correct in the editor but is missing from the live site. Use this{" "}
+        <Link href="/blog/sitecore-nextjs-published-page-404">Sitecore and Next.js 404 troubleshooting guide</Link>
+        {" "}to narrow down the cause.
       </p>
 
       <h2 className="h4 mt-4">When does Sitecore make sense?</h2>

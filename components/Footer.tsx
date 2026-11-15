@@ -14,9 +14,9 @@ export default function Footer() {
               </span>
             </div>
             <p className="footer-copy mb-3">
-              Premium websites, Sitecore and headless CMS solutions, AI integrations, and technical SEO foundations for brands that want to look credible and scale.
+              Independent web engineering for Sitecore migrations, headless CMS, and AI integrations.
             </p>
-            <a href="mailto:contact@autonodeai.com" className="footer-link">contact@autonodeai.com</a>
+            <Link href="/sitecore-migration-review" className="footer-link">Request a Sitecore migration review</Link>
           </div>
           <div className="col-lg-2 col-md-4">
             <h3 className="footer-heading">Company</h3>
@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="col-lg-2 col-md-4">
             <h3 className="footer-heading">Platforms</h3>
             <div className="d-grid gap-2 small">
-              <Link href="/technologies" className="footer-link">Sitecore</Link>
+              <Link href="/sitecore-development" className="footer-link">Sitecore</Link>
               <Link href="/technologies" className="footer-link">WordPress</Link>
               <Link href="/technologies" className="footer-link">Contentful</Link>
             </div>
@@ -37,9 +37,9 @@ export default function Footer() {
           <div className="col-lg-3 col-md-4">
             <h3 className="footer-heading">Capabilities</h3>
             <div className="d-grid gap-2 small">
-              <span className="footer-link">Website redesign</span>
-              <span className="footer-link">CMS migration</span>
-              <span className="footer-link">AI chatbot integration</span>
+              <Link href="/headless-cms-development" className="footer-link">Headless CMS development</Link>
+              <Link href="/sitecore-xm-cloud-development" className="footer-link">Sitecore XM Cloud migration</Link>
+              <Link href="/ai-chatbot-development" className="footer-link">AI chatbot integration</Link>
             </div>
           </div>
         </div>

@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ORGANIZATION_ID, SITE_NAME, SITE_URL } from "@/lib/site";
+import { ORGANIZATION_ID, SITE_NAME, SITE_URL, sitePageMetadata } from "@/lib/site";
+import { cardImageSizes, halfContainerImageSizes } from "@/lib/image-sizes";
 
-export const metadata: Metadata = {
-  title: "Sitecore Migration and XM Cloud Development",
-  description:
-    "AutonodeAI helps with Sitecore XM Cloud migrations, headless CMS development, and AI integrations. Request a free review of your migration plan.",
-};
+export const metadata = sitePageMetadata(
+  "/",
+  "Sitecore XM Cloud Migration and Headless CMS | AutonodeAI",
+  "AutonodeAI helps teams migrate Sitecore XP or XM to XM Cloud, build headless Next.js sites, and improve publishing and launch SEO. Request a free migration review.",
+);
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -53,9 +53,9 @@ export default function Home() {
                     Request a free migration review
                   </Link>
 
-                  <a href="#services" className="btn btn-brand-outline btn-lg">
-                    Explore Services
-                  </a>
+                  <Link href="/sitecore-xm-cloud-development" className="btn btn-brand-outline btn-lg">
+                    Explore migration services
+                  </Link>
                 </div>
 
                 <div className="hero-trust-grid mt-5">
@@ -92,6 +92,7 @@ export default function Home() {
                     alt="Professional digital technology and enterprise web development"
                     width={900}
                     height={700}
+                    sizes={halfContainerImageSizes}
                     className="hero-image"
                     priority
                   />
@@ -116,15 +117,14 @@ export default function Home() {
           <div className="container text-center">
             <span className="eyebrow mb-3">Core Services</span>
 
-            <h2 className="section-title">Enterprise Web & DXP Services</h2>
+            <h2 className="section-title">Sitecore, Headless CMS and AI Services</h2>
 
             <p
               className="section-copy mx-auto mb-5"
               style={{ maxWidth: "760px" }}
             >
-              We deliver premium digital solutions for companies looking to
-              modernize their web presence, improve customer experience, and
-              create scalable digital platforms across CMS, commerce, and AI.
+              Plan a migration, improve an existing CMS, or build a frontend
+              that editors can publish to and customers can find.
             </p>
 
             <div className="row g-4">
@@ -135,17 +135,15 @@ export default function Home() {
                     width={600}
                     height={420}
                     alt="Enterprise website development and software engineering"
+                    sizes={cardImageSizes}
                     className="card-thumb-light"
                   />
                   <div className="p-4 text-start">
-                    <div className="service-number mb-2">01</div>
                     <h3 className="service-title">
-                      Enterprise Website Development
+                      <Link href="/headless-cms-development" className="text-link">Headless CMS and Next.js</Link>
                     </h3>
                     <p className="card-copy-dark mb-0">
-                      High-performance business websites built with React,
-                      Next.js, .NET, and modern front-end architecture for
-                      speed, SEO, and maintainability.
+                      Build or migrate a headless site with editorial preview, reliable publishing, and technical SEO.
                     </p>
                   </div>
                 </div>
@@ -158,15 +156,13 @@ export default function Home() {
                     width={600}
                     height={420}
                     alt="Digital experience platform and CMS implementation"
+                    sizes={cardImageSizes}
                     className="card-thumb-light"
                   />
                   <div className="p-4 text-start">
-                    <div className="service-number mb-2">02</div>
-                    <h3 className="service-title">DXP & CMS Implementation</h3>
+                    <h3 className="service-title"><Link href="/sitecore-development" className="text-link">Sitecore XP and XM Development</Link></h3>
                     <p className="card-copy-dark mb-0">
-                      Sitecore, WordPress, Contentful, Strapi, and headless CMS
-                      implementation designed for content flexibility,
-                      governance, and enterprise growth.
+                      Build components, modernize an existing installation, or diagnose multilingual and publishing issues.
                     </p>
                   </div>
                 </div>
@@ -179,17 +175,15 @@ export default function Home() {
                     width={600}
                     height={420}
                     alt="AI automation and modern digital solutions"
+                    sizes={cardImageSizes}
                     className="card-thumb-light"
                   />
                   <div className="p-4 text-start">
-                    <div className="service-number mb-2">03</div>
                     <h3 className="service-title">
-                      AI Automation & Integration
+                      <Link href="/ai-chatbot-development" className="text-link">AI Chatbot Development</Link>
                     </h3>
                     <p className="card-copy-dark mb-0">
-                      AI chatbots, smart content workflows, search enhancement,
-                      business automation, and intelligent digital experiences
-                      integrated into modern websites and platforms.
+                      Connect a website assistant to approved content and build a clear handoff for support or sales enquiries.
                     </p>
                   </div>
                 </div>
@@ -239,6 +233,7 @@ export default function Home() {
                   width={900}
                   height={650}
                   alt="Modern devices and digital platform engineering"
+                  sizes={halfContainerImageSizes}
                   className="content-image"
                 />
               </div>
@@ -309,9 +304,9 @@ export default function Home() {
               <h2 className="section-title">Latest Articles & Guides</h2>
 
               <p className="section-copy mx-auto" style={{ maxWidth: "760px" }}>
-                Learn about modern website development, enterprise CMS
-                platforms, AI integration, and digital experience engineering.
+                Practical guides to Sitecore upgrades, troubleshooting and headless launches.
               </p>
+              <Link href="/blog" className="text-link">Browse all guides</Link>
             </div>
 
             <div className="row g-4">
@@ -325,6 +320,7 @@ export default function Home() {
                     width={600}
                     height={420}
                     alt="Sitecore CMS enterprise platform guide"
+                    sizes={cardImageSizes}
                     className="card-thumb-light"
                   />
 
@@ -343,25 +339,25 @@ export default function Home() {
 
               <div className="col-md-6 col-lg-4">
                 <a
-                  href="/ai-chatbot-websites"
+                  href="/blog/sitecore-nextjs-published-page-404"
                   className="service-card-light h-100 d-block text-start"
                 >
                   <Image
-                    src="/images/ai.jpg"
+                    src="/images/devices.jpg"
                     width={600}
                     height={420}
-                    alt="AI chatbot integration for websites"
+                    alt=""
+                    sizes={cardImageSizes}
                     className="card-thumb-light"
                   />
 
                   <div className="p-4">
                     <h3 className="service-title mb-2">
-                      How to Use a Website Chatbot to Capture Qualified Leads
+                      Why a Published Sitecore Page Returns 404 in Next.js
                     </h3>
 
                     <p className="card-copy-dark mb-0">
-                      Plan what to ask, how to hand off an enquiry, and how to
-                      measure qualified leads.
+                      Trace the site name, published route, language, and frontend response.
                     </p>
                   </div>
                 </a>
@@ -377,6 +373,7 @@ export default function Home() {
                     width={600}
                     height={420}
                     alt="Headless CMS architecture and modern web development"
+                    sizes={cardImageSizes}
                     className="card-thumb-light"
                   />
 

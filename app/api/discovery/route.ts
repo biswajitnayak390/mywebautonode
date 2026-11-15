@@ -16,16 +16,12 @@ export async function POST(request: Request) {
     const port = Number(process.env.SMTP_PORT || 587);
     const user = process.env.SMTP_USER;
     const pass = process.env.SMTP_PASS;
-    const toEmail = process.env.CONTACT_TO_EMAIL || "contact@autonodeai.com";
+    const toEmail = process.env.CONTACT_TO_EMAIL;
 
-    if (!host || !port || !user || !pass) {
+    if (!host || !port || !user || !pass || !toEmail) {
       return Response.json(
-        {
-          ok: false,
-          message:
-            "Email sending is not configured yet. Add SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, and optionally CONTACT_TO_EMAIL in your environment variables.",
-        },
-        { status: 500 },
+        { ok: false, message: "Unable to submit your request right now." },
+        { status: 503 },
       );
     }
 

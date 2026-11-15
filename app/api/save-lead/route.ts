@@ -12,7 +12,7 @@ type Lead = {
 
 class LeadValidationError extends Error {}
 
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "contact@autonodeai.com";
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL;
 
 function validateLead(body: Record<string, unknown>): Lead {
   const lead: Lead = {
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
     const user = process.env.SMTP_USER;
     const pass = process.env.SMTP_PASS;
 
-    if (!user || !pass) {
+    if (!user || !pass || !CONTACT_EMAIL) {
       console.error("SMTP credentials are missing.");
       return Response.json(
         { ok: false, message: "Email service is not configured." },
