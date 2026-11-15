@@ -25,7 +25,9 @@ export default function HeadlessCmsDevelopmentPage() {
           the existing CMS can support the new frontend. If you’re evaluating
           Contentful or Strapi, compare who would operate the platform, how
           permissions work, and whether editors can preview the content they
-          publish.
+          publish. See the{" "}
+          <Link href="/technologies">CMS platforms and frontend technologies we work with</Link>
+          {" "}if you’re comparing options.
         </p>
       </section>
       <section className="mb-5">

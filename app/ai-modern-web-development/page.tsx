@@ -6,6 +6,7 @@ const article = {
   title: "Where AI Fits in Next.js and Headless CMS Websites",
   description:
     "Choose a useful first AI feature for a business website, from lead intake to content search, and test it before rolling it out.",
+  published: "2026-03-17",
   updated: "2026-11-14",
 };
 

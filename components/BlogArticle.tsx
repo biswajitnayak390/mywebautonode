@@ -12,6 +12,11 @@ type ArticleDetails = {
   updated?: string;
 };
 
+const articleDateFormatter = new Intl.DateTimeFormat("en-IN", {
+  dateStyle: "long",
+  timeZone: "Asia/Kolkata",
+});
+
 function articleImage({ path, title }: ArticleDetails) {
   if (!Object.hasOwn(articleCovers, path)) return undefined;
 
@@ -54,11 +59,7 @@ export default function BlogArticle({
   details: ArticleDetails;
   children: ReactNode;
 }) {
-  const date = details.updated ?? details.published;
-  const displayDate = date && new Intl.DateTimeFormat("en-IN", {
-    dateStyle: "long",
-    timeZone: "Asia/Kolkata",
-  }).format(new Date(date));
+  const { published, updated } = details;
   const image = articleImage(details);
   const schema = {
     "@context": "https://schema.org",
@@ -90,10 +91,16 @@ export default function BlogArticle({
           <h1 className="section-title">{details.title}</h1>
           <p className="text-muted mb-0">
             By <Link href="/about">{SITE_NAME}</Link>
-            {date && (
+            {published && published !== updated && (
               <>
-                {" · "}{details.updated ? "Updated " : ""}
-                <time dateTime={date}>{displayDate}</time>
+                {" · Published "}
+                <time dateTime={published}>{articleDateFormatter.format(new Date(published))}</time>
+              </>
+            )}
+            {updated && (
+              <>
+                {" · Updated "}
+                <time dateTime={updated}>{articleDateFormatter.format(new Date(updated))}</time>
               </>
             )}
           </p>

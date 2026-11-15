@@ -6,6 +6,7 @@ const article = {
   title: "How to Use a Website Chatbot to Capture Qualified Leads",
   description:
     "Plan chatbot questions, hand off enquiries to a person, and measure qualified leads while keeping a short contact form available.",
+  published: "2026-03-17",
   updated: "2026-11-14",
 };
 

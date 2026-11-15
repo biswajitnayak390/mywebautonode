@@ -34,7 +34,9 @@ export default function SitecoreMigrationService() {
           publishing or frontend goal, choose one page an editor can preview,
           translate, and publish during a pilot. Use the{" "}
           <Link href="/blog/sitecore-xp-upgrade-vs-sitecoreai-migration">Sitecore XP upgrade and SitecoreAI migration comparison</Link>
-          {" "}to decide which option to scope first.
+          {" "}to decide which option to scope first. The{" "}
+          <Link href="/sitecore-migration-pilot">migration pilot demo</Link>{" "}
+          shows how to record and check sample redirects, language URLs, and a published update.
         </p>
         <p className="section-copy">
           A site with reusable content templates and a small set of renderings can

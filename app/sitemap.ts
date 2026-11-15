@@ -10,6 +10,7 @@ const pages: { path: string; lastModified?: string }[] = [
   { path: "/sitecore-development", lastModified: "2026-11-15" },
   { path: "/sitecore-xm-cloud-development", lastModified: "2026-11-15" },
   { path: "/sitecore-migration-review", lastModified: "2026-11-15" },
+  { path: "/sitecore-migration-pilot", lastModified: "2026-11-15" },
   { path: "/headless-cms-development", lastModified: "2026-11-15" },
   { path: "/ai-chatbot-development", lastModified: "2026-11-15" },
   { path: "/ai-chatbot-websites", lastModified: "2026-11-15" },
