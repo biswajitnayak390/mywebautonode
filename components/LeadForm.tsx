@@ -2,13 +2,20 @@
 
 import { type FormEvent, useId, useRef, useState } from "react";
 
-type LeadFormProps = {
-  source: "contact" | "sitecore-migration-review";
-};
+export type LeadFormSource =
+  | "contact"
+  | "sitecore-migration-review"
+  | "chatbot-project"
+  | "chatbot-sitecore-migration"
+  | "chatbot-website-review";
+
+type LeadFormProps = { source: LeadFormSource };
 
 export default function LeadForm({ source }: LeadFormProps) {
   const id = useId();
-  const isReview = source === "sitecore-migration-review";
+  const isReview = source === "sitecore-migration-review" || source === "chatbot-sitecore-migration";
+  const isWebsiteReview = source === "chatbot-website-review";
+  const compact = source.startsWith("chatbot-");
   const submitting = useRef(false);
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [error, setError] = useState("");
@@ -46,6 +53,12 @@ export default function LeadForm({ source }: LeadFormProps) {
         setStatus("idle");
         return;
       }
+
+      if (response.status >= 500) {
+        setError("The enquiry service is temporarily unavailable. Your details are still here. Please try again later.");
+        setStatus("idle");
+        return;
+      }
     } catch {
       // Keep the form filled so the visitor can retry.
     } finally {
@@ -66,7 +79,7 @@ export default function LeadForm({ source }: LeadFormProps) {
 
   return (
     <form method="post" onSubmit={handleSubmit}>
-      <fieldset className="row g-3" disabled={status === "sending"}>
+      <fieldset className={compact ? "row g-2" : "row g-3"} disabled={status === "sending"}>
         <div className="col-sm-6">
           <label className="form-label" htmlFor={`${id}-name`}>Name</label>
           <input
@@ -79,7 +92,7 @@ export default function LeadForm({ source }: LeadFormProps) {
           />
         </div>
         <div className="col-sm-6">
-          <label className="form-label" htmlFor={`${id}-email`}>Work email</label>
+          <label className="form-label" htmlFor={`${id}-email`}>Email</label>
           <input
             className="form-control"
             id={`${id}-email`}
@@ -92,7 +105,7 @@ export default function LeadForm({ source }: LeadFormProps) {
         </div>
         <div className="col-12">
           <label className="form-label" htmlFor={`${id}-message`}>
-            {isReview ? "What are you planning to migrate?" : "How can we help?"}
+            {isReview ? "What are you planning to migrate?" : isWebsiteReview ? "What would you like us to review?" : "How can we help?"}
           </label>
           <textarea
             className="form-control"

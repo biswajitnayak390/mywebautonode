@@ -693,6 +693,28 @@ textarea.form-control {
   box-shadow: var(--brand-shadow);
 }
 
+.autonode-chat-window[hidden] {
+  display: none;
+}
+
+.autonode-chat-enquiry {
+  padding: 0.875rem;
+  border: 1px solid var(--brand-line);
+  border-radius: 0.875rem;
+  background: var(--brand-white);
+}
+
+.autonode-chat-back {
+  min-height: 2.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--brand-primary-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .autonode-chat-header {
   display: flex;
   flex: none;
