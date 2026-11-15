@@ -1,77 +1,69 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import ServicePage, { serviceMetadata } from "@/components/ServicePage";
 
-export const metadata: Metadata = {
-  title: "Sitecore Development Services | Enterprise CMS Experts",
+const service = {
+  path: "/sitecore-development",
+  title: "Sitecore XP and XM Development Services",
   description:
-    "AutonodeAI provides enterprise Sitecore development including Sitecore XM Cloud, headless architecture, and digital experience platforms.",
-  alternates: { canonical: "/sitecore-development" },
+    "Get Sitecore XP and XM development support for MVC, SXA, JSS, and Next.js. Diagnose publishing and routing issues, build components, and improve multilingual sites.",
 };
 
-export default function Page() {
+export const metadata = serviceMetadata(service);
+
+export default function SitecoreDevelopmentPage() {
   return (
-    <main className="section-pad page-top-space">
-      <div className="container">
-        <h1 className="section-title mb-4">Sitecore Development Services</h1>
-
-        <p>
-          Sitecore is one of the most powerful enterprise content management
-          systems used by global organizations to deliver personalized digital
-          experiences. AutonodeAI provides modern Sitecore development services
-          that help businesses build scalable digital platforms using the latest
-          technologies including headless architecture, React, and cloud
-          infrastructure.
+    <ServicePage
+      service={service}
+      lead="Get engineering support for an existing Sitecore website. AutonodeAI works across MVC, SXA, and headless Sitecore to build components, fix publishing and routing issues, and help editors manage multilingual content."
+      action={{ href: "/contact", label: "Discuss your Sitecore project" }}
+    >
+      <section className="mb-5">
+        <h2 className="h3 mb-3">Where we can help</h2>
+        <div className="row g-3">
+          <div className="col-md-6">
+            <div className="service-card-light p-4 h-100">
+              <h3 className="h5">Components and templates</h3>
+              <p className="section-copy mb-0">Build or update MVC and SXA renderings, data source templates, and editing workflows. Verify the result in the editor and on the live site.</p>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="service-card-light p-4 h-100">
+              <h3 className="h5">Publishing and headless routing</h3>
+              <p className="section-copy mb-0">Trace a missing page from the site definition and language version to its published route data and the Next.js response.</p>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="service-card-light p-4 h-100">
+              <h3 className="h5">Multilingual and multisite delivery</h3>
+              <p className="section-copy mb-0">Review how hostnames, language versions, fallback and navigation work together. Test the same content on the correct site and domain.</p>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="service-card-light p-4 h-100">
+              <h3 className="h5">Frontend modernization</h3>
+              <p className="section-copy mb-0">Choose a candidate for headless delivery, such as a section with repeatable templates, and validate its authoring workflow, performance, and URLs in a pilot.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="mb-5">
+        <h2 className="h3 mb-3">What to include in your enquiry</h2>
+        <p className="section-copy mb-0">
+          Share your Sitecore version, the frontend stack, and one page or
+          component that shows what you want to improve. For a publishing issue,
+          describe what the editor sees, what the live site shows, and which
+          language is affected. That gives us a place to start without sharing
+          production credentials or a database export.
         </p>
-
-        <h2>Enterprise Sitecore Solutions</h2>
-
-        <p>
-          Our Sitecore development services focus on building enterprise-grade
-          websites that are fast, scalable, and optimized for digital
-          experience. We help companies implement Sitecore platforms that
-          support large content ecosystems, multilingual websites, and complex
-          integrations.
-        </p>
-
-        <ul>
-          <li>Sitecore CMS implementation</li>
-          <li>Sitecore headless development</li>
-          <li>Sitecore migration and upgrades</li>
-          <li>Sitecore performance optimization</li>
-          <li>Sitecore integrations with enterprise systems</li>
+      </section>
+      <section>
+        <h2 className="h3 mb-3">Sitecore resources</h2>
+        <ul className="section-copy ps-3 mb-0">
+          <li><Link href="/blog/sitecore-nextjs-published-page-404">Diagnose a published Sitecore page returning 404 in Next.js</Link></li>
+          <li><Link href="/blog/sitecore-cms-guide">Compare Sitecore XP, XM, and XM Cloud</Link></li>
+          <li><Link href="/sitecore-xm-cloud-development">Plan a Sitecore XM Cloud migration</Link></li>
         </ul>
-
-        <h2>Why Businesses Choose Sitecore</h2>
-
-        <p>
-          Sitecore enables organizations to deliver personalized digital
-          experiences across multiple channels. With powerful content
-          management, marketing automation, and analytics capabilities, Sitecore
-          helps businesses manage large digital ecosystems with flexibility and
-          control.
-        </p>
-        <Link href="/sitecore-migration-review" className="btn btn-brand-primary my-3">
-          Request a free migration review
-        </Link>
-      </div>
-      <p>
-        If you are planning to implement Sitecore or modernize your digital
-        experience platform, the experts at{" "}
-        <a
-          href="/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          AutonodeAI
-        </a>{" "}
-        can help you design and build scalable enterprise websites using
-        Sitecore and modern headless technologies.
-      </p>
-
-      <p>
-        Visit our website to learn more about our enterprise web development,
-        CMS implementation, and AI-powered digital solutions.
-      </p>
-    </main>
+      </section>
+    </ServicePage>
   );
 }

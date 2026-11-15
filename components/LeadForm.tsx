@@ -47,12 +47,12 @@ export default function LeadForm({ source }: LeadFormProps) {
         return;
       }
     } catch {
-      // The email link below is available if the request cannot reach the site.
+      // Keep the form filled so the visitor can retry.
     } finally {
       submitting.current = false;
     }
 
-    setError("Your request could not be sent. Please try again or use the email link below.");
+    setError("We couldn’t submit your request. Please try again.");
     setStatus("idle");
   }
 
@@ -124,8 +124,7 @@ export default function LeadForm({ source }: LeadFormProps) {
         </div>
       </fieldset>
       <p className="small text-muted mt-3 mb-0">
-        We’ll use these details to reply to your request. You can also email{" "}
-        <a href="mailto:contact@autonodeai.com">contact@autonodeai.com</a>.
+        We use your contact details to follow up on this request.
       </p>
     </form>
   );

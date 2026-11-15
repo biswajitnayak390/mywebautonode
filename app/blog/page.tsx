@@ -1,12 +1,18 @@
-import type { Metadata } from "next";
+import { sitePageMetadata } from "@/lib/site";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Sitecore, Headless CMS, and Website Lead Guides",
-  description: "Practical guides to moving Sitecore sites to XM Cloud, launching headless Next.js sites, and capturing enquiries with a website chatbot.",
-};
+export const metadata = sitePageMetadata(
+  "/blog",
+  "Sitecore and Headless CMS Guides",
+  "Practical guides to moving Sitecore sites to XM Cloud, troubleshooting Next.js 404s, and launching headless CMS websites.",
+);
 
 const articles = [
+  {
+    href: "/blog/sitecore-nextjs-published-page-404",
+    title: "Why a Published Sitecore Page Returns 404 in Next.js",
+    description: "Find the cause by tracing the site name, language, published route, and frontend response.",
+  },
   {
     href: "/blog/sitecore-xm-cloud-migration-checklist",
     title: "Sitecore XP to XM Cloud Migration Checklist",

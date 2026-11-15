@@ -1,9 +1,11 @@
-import type { Metadata } from 'next';
+import Link from "next/link";
+import { sitePageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: 'Platforms & Technologies',
-  description: 'AutonodeAI works with Sitecore, WordPress, Contentful, Strapi, Next.js, React, .NET, Bootstrap, and AI integrations for modern digital experiences.'
-};
+export const metadata = sitePageMetadata(
+  "/technologies",
+  "Sitecore, Next.js and Headless CMS Platforms",
+  "Compare the platforms AutonodeAI works with for content modelling, publishing, .NET integrations, and headless Next.js development.",
+);
 
 const tech = [
   ['Sitecore', 'Enterprise CMS, DXP implementation, component engineering, and modern front-end integration.'],
@@ -18,11 +20,10 @@ const tech = [
 
 export default function TechnologiesPage() {
   return (
-    <main className="section-pad page-top-space">
+    <main className="section-pad">
       <div className="container">
-        <span className="eyebrow mb-3">Platforms & technologies</span>
-        <h1 className="section-title mb-3">The stack now clearly reflects Sitecore and other CMS expertise.</h1>
-        <p className="section-copy mb-5">This page is also useful for SEO because it expands the platform footprint beyond generic “web development” wording.</p>
+        <h1 className="section-title mb-3">Sitecore, Next.js and Headless CMS Platforms</h1>
+        <p className="section-copy mb-5">Explore the tools we use to model content, build frontends, and connect enterprise integrations.</p>
         <div className="row g-4">
           {tech.map(([name, desc]) => (
             <div className="col-md-6" key={name}>
@@ -33,6 +34,10 @@ export default function TechnologiesPage() {
             </div>
           ))}
         </div>
+        <p className="section-copy mt-4 mb-0">
+          See how we use these platforms in our{" "}
+          <Link href="/headless-cms-development">headless CMS development services</Link>.
+        </p>
       </div>
     </main>
   );
