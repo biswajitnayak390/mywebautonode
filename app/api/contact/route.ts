@@ -2,6 +2,14 @@ import nodemailer from "nodemailer";
 
 const unavailableMessage = "Unable to send your request right now.";
 
+const requestTypes: Record<string, string> = {
+  "sitecore-migration-review": "Sitecore Migration Review",
+  contact: "Project Enquiry",
+  "chatbot-project": "Project Enquiry",
+  "chatbot-sitecore-migration": "Sitecore Migration Review",
+  "chatbot-website-review": "Website Review",
+};
+
 export async function POST(request: Request) {
   const contentType = request.headers.get("content-type")?.split(";")[0].trim();
   if (contentType?.toLowerCase() !== "application/json") {
@@ -19,10 +27,10 @@ export async function POST(request: Request) {
     return typeof value === "string" ? value.trim() : "";
   }
 
-  const name = field("name");
+  const name = oneLine(field("name"));
   const email = field("email");
-  const company = field("company");
-  const website = field("website");
+  const company = oneLine(field("company"));
+  const website = oneLine(field("website"));
   const message = field("message");
 
   if (!name || !email || !message) {
@@ -40,23 +48,24 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, message: "One of the fields is too long." }, { status: 400 });
   }
 
-  const host = process.env.SMTP_HOST;
+  const host = process.env.SMTP_HOST?.trim();
   const port = Number(process.env.SMTP_PORT || 587);
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-  const toEmail = process.env.CONTACT_TO_EMAIL || process.env.CONTACT_EMAIL;
+  const user = process.env.SMTP_USER?.trim();
+  const password = process.env.SMTP_PASS?.trim();
+  const appPassword = password?.replace(/\s+/g, "");
+  const pass = host?.toLowerCase() === "smtp.gmail.com" && appPassword?.length === 16
+    ? appPassword
+    : password;
+  const source = field("source");
+  const toEmail = (process.env.CONTACT_TO_EMAIL || process.env.CONTACT_EMAIL)?.trim();
 
   if (!host || !user || !pass || !toEmail || !Number.isInteger(port) || port < 1 || port > 65535) {
     console.error("Contact form SMTP configuration is incomplete.");
     return Response.json({ ok: false, message: unavailableMessage }, { status: 503 });
   }
 
-  const requestTypes: Record<string, string> = {
-    "sitecore-migration-review": "Sitecore Migration Review",
-    contact: "Project Enquiry",
-  };
-  const source = field("source");
   const requestType = Object.hasOwn(requestTypes, source) ? requestTypes[source] : "Discovery Call";
+  const subjectType = requestType === "Website Review" ? "Project Enquiry" : requestType;
   const attribution = ["utm_source", "utm_campaign"].flatMap((key) => {
     const value = field(key);
     return /^[a-z0-9_.-]{1,80}$/i.test(value) ? [`${key}: ${value}`] : [];
@@ -67,6 +76,7 @@ export async function POST(request: Request) {
       host,
       port,
       secure: port === 465,
+      requireTLS: true,
       auth: { user, pass },
       connectionTimeout: 8_000,
       greetingTimeout: 8_000,
@@ -76,7 +86,7 @@ export async function POST(request: Request) {
       from: { name: "AutonodeAI Website", address: user },
       to: toEmail,
       replyTo: { name: "", address: email },
-      subject: `New ${requestType} Request from ${name.replace(/\s+/g, " ")}`,
+      subject: `New ${subjectType} Request from ${name.replace(/\s+/g, " ")}`,
       text: [
         `Request: ${requestType}`,
         `Name: ${name}`,
@@ -96,7 +106,14 @@ export async function POST(request: Request) {
 
     return Response.json({ ok: true, message: "Request sent successfully." });
   } catch (error) {
-    console.error("Contact form SMTP delivery failed.", (error as NodeJS.ErrnoException | null)?.code);
+    const smtpError = error as (NodeJS.ErrnoException & { responseCode?: number }) | null;
+    const code = /^[A-Z]{2,20}$/.test(smtpError?.code ?? "") ? smtpError?.code : "UNCLASSIFIED";
+    const status = Number.isInteger(smtpError?.responseCode) ? smtpError?.responseCode : undefined;
+    console.error("Contact form SMTP delivery failed.", code, status);
     return Response.json({ ok: false, message: unavailableMessage }, { status: 502 });
   }
+}
+
+function oneLine(value: string) {
+  return value.replace(/[\r\n]+/g, " ").trim();
 }

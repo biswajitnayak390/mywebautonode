@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import LeadForm, { type LeadFormSource } from "@/components/LeadForm";
 import { type FormEvent, useEffect, useRef, useState } from "react";
 
 type Reply = {
@@ -40,7 +41,7 @@ const replies = {
   website: {
     text: "For a website review, share your URL and the issue you want to address, such as page speed, search visibility, navigation, or enquiries.",
     links: [
-      { href: "/contact", label: "Request a website review" },
+      { href: "/contact", label: "Open the contact page" },
       { href: "/blog/headless-cms-seo-checklist", label: "Read the website launch checklist" },
     ],
   },
@@ -58,6 +59,15 @@ const replies = {
 } satisfies Record<string, Reply>;
 
 type Topic = keyof typeof replies;
+type ChatFormSource = Extract<LeadFormSource, `chatbot-${string}`>;
+
+const enquiryForms = {
+  migration: { source: "chatbot-sitecore-migration", title: "Request a migration review" },
+  website: { source: "chatbot-website-review", title: "Request a website review" },
+  project: { source: "chatbot-project", title: "Send a project enquiry" },
+} as const satisfies Record<string, { source: ChatFormSource; title: string }>;
+
+type EnquiryForm = (typeof enquiryForms)[keyof typeof enquiryForms];
 type Exchange = { id: number; question: string; topic: Topic };
 type OpenDetails = { origin?: HTMLElement; topic?: "website" };
 
@@ -84,6 +94,12 @@ export default function SimpleChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [question, setQuestion] = useState("");
   const [history, setHistory] = useState<Exchange[]>([]);
+  const [enquiry, setEnquiry] = useState<EnquiryForm | null>(null);
+  const enquiryHeading = useRef<HTMLHeadingElement>(null);
+  const latestTopic = history[history.length - 1]?.topic;
+  const nextEnquiry = latestTopic === "migration" || latestTopic === "website"
+    ? enquiryForms[latestTopic]
+    : enquiryForms.project;
   const dock = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
@@ -136,8 +152,10 @@ export default function SimpleChatBot() {
 
   useEffect(() => {
     const body = chatBody.current;
-    if (isOpen && body) body.scrollTop = body.scrollHeight;
-  }, [history, isOpen]);
+    if (!isOpen || !body) return;
+    body.scrollTop = enquiry ? 0 : body.scrollHeight;
+    if (enquiry) enquiryHeading.current?.focus({ preventScroll: true });
+  }, [enquiry, history, isOpen]);
 
   function close(restore = true) {
     setIsOpen(false);
@@ -181,8 +199,9 @@ export default function SimpleChatBot() {
         {isOpen ? "Close chat" : "Chat with AutonodeAI"}
       </button>
 
-      {isOpen && (
+      {(isOpen || enquiry) && (
         <aside
+          hidden={!isOpen}
           id="autonode-chat"
           className="autonode-chat-window"
           role="dialog"
@@ -197,7 +216,7 @@ export default function SimpleChatBot() {
           <div className="autonode-chat-header">
             <h2 id="autonode-chat-title">AutonodeAI Assistant</h2>
             <div className="autonode-chat-header-actions">
-              {history.length > 0 && (
+              {!enquiry && history.length > 0 && (
                 <button
                   type="button"
                   className="autonode-chat-reset"
@@ -223,52 +242,76 @@ export default function SimpleChatBot() {
           </div>
 
           <div className="autonode-chat-body" ref={chatBody}>
-            <p className="autonode-chat-bubble bot">What can I help you find?</p>
-            <div className="autonode-chat-actions" aria-label="Suggested topics" role="group">
-              {shortcuts.map(({ topic, label }) => (
-                <button type="button" className="autonode-chip" key={topic} onClick={() => ask(label, topic)}>
-                  {label}
+            {enquiry ? (
+              <section className="autonode-chat-enquiry">
+                <button
+                  type="button"
+                  className="autonode-chat-back"
+                  onClick={() => {
+                    setEnquiry(null);
+                    closeButton.current?.focus({ preventScroll: true });
+                  }}
+                >
+                  Back to chat
                 </button>
-              ))}
-            </div>
-            <div role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions">
-              {history.map(exchange => {
-                const reply = replies[exchange.topic];
-                return (
-                  <div key={exchange.id}>
-                    <p className="autonode-chat-bubble user">{exchange.question}</p>
-                    <div className="autonode-chat-bubble bot">
-                      <p>{reply.text}</p>
-                      <ul className="autonode-chat-links">
-                        {reply.links.map(link => (
-                          <li key={link.href}>
-                            <Link href={link.href} prefetch={false} onClick={() => close(false)}>
-                              {link.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                <h3 className="h6 mb-3" tabIndex={-1} ref={enquiryHeading}>{enquiry.title}</h3>
+                <LeadForm source={enquiry.source} />
+              </section>
+            ) : (
+              <>
+                <p className="autonode-chat-bubble bot">What can I help you find?</p>
+                <div className="autonode-chat-actions" aria-label="Suggested topics" role="group">
+                  {shortcuts.map(({ topic, label }) => (
+                    <button type="button" className="autonode-chip" key={topic} onClick={() => ask(label, topic)}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                <div role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions">
+                  {history.map(exchange => {
+                    const reply = replies[exchange.topic];
+                    return (
+                      <div key={exchange.id}>
+                        <p className="autonode-chat-bubble user">{exchange.question}</p>
+                        <div className="autonode-chat-bubble bot">
+                          <p>{reply.text}</p>
+                          <ul className="autonode-chat-links">
+                            {reply.links.map(link => (
+                              <li key={link.href}>
+                                <Link href={link.href} prefetch={false} onClick={() => close(false)}>
+                                  {link.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <button type="button" className="autonode-chip" onClick={() => setEnquiry(nextEnquiry)}>
+                  {nextEnquiry.title}
+                </button>
+              </>
+            )}
           </div>
 
-          <form className="autonode-chat-input-wrap" onSubmit={submit}>
-            <label className="visually-hidden" htmlFor="autonode-chat-question">Question about AutonodeAI services</label>
-            <input
-              className="autonode-chat-input"
-              id="autonode-chat-question"
-              value={question}
-              onChange={event => setQuestion(event.currentTarget.value)}
-              placeholder="Ask about our services"
-              maxLength={220}
-              autoComplete="off"
-              enterKeyHint="send"
-            />
-            <button type="submit" className="autonode-chat-send" disabled={!question.trim()}>Ask</button>
-          </form>
+          {!enquiry && (
+            <form className="autonode-chat-input-wrap" onSubmit={submit}>
+              <label className="visually-hidden" htmlFor="autonode-chat-question">Question about AutonodeAI services</label>
+              <input
+                className="autonode-chat-input"
+                id="autonode-chat-question"
+                value={question}
+                onChange={event => setQuestion(event.currentTarget.value)}
+                placeholder="Ask about our services"
+                maxLength={220}
+                autoComplete="off"
+                enterKeyHint="send"
+              />
+              <button type="submit" className="autonode-chat-send" disabled={!question.trim()}>Ask</button>
+            </form>
+          )}
         </aside>
       )}
     </div>
