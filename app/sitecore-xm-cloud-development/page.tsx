@@ -3,9 +3,9 @@ import ServicePage, { serviceMetadata } from "@/components/ServicePage";
 
 const service = {
   path: "/sitecore-xm-cloud-development",
-  title: "Sitecore XM Cloud Migration Services",
+  title: "SitecoreAI Migration Services (XM Cloud)",
   description:
-    "Plan your move from Sitecore XP or XM to XM Cloud (SitecoreAI). Get a content and component inventory, a Next.js pilot, and a launch plan that protects existing URLs.",
+    "Migrate from Sitecore XP or XM to SitecoreAI (XM Cloud). Scope components and integrations, validate a Next.js publishing pilot, and plan redirects and cutover.",
 };
 
 export const metadata = serviceMetadata(service);
@@ -14,7 +14,7 @@ export default function SitecoreMigrationService() {
   return (
     <ServicePage
       service={service}
-      lead="Migrate from Sitecore XP or XM to XM Cloud, now part of SitecoreAI. AutonodeAI helps you decide what to carry over, prove a publishing workflow on a small set of pages, and plan the cutover around your current website."
+      lead="Migrate from Sitecore XP or XM to SitecoreAI, which builds on XM Cloud. AutonodeAI helps you map content and integrations, test a publishing workflow in Next.js, and plan the launch around the URLs and forms your visitors use today."
       action={{ href: "/sitecore-migration-review", label: "Request a free migration review" }}
     >
       <section className="mb-5">
@@ -27,7 +27,15 @@ export default function SitecoreMigrationService() {
         </ol>
       </section>
       <section className="mb-5">
-        <h2 className="h3 mb-3">Decisions to make before estimating the work</h2>
+        <h2 className="h3 mb-3">Decide whether to upgrade XP or start a SitecoreAI pilot</h2>
+        <p className="section-copy">
+          If a support deadline is driving the project, start by checking whether
+          an XP upgrade can meet it while you evaluate a move to SaaS. For a
+          publishing or frontend goal, choose one page an editor can preview,
+          translate, and publish during a pilot. Use the{" "}
+          <Link href="/blog/sitecore-xp-upgrade-vs-sitecoreai-migration">Sitecore XP upgrade and SitecoreAI migration comparison</Link>
+          {" "}to decide which option to scope first.
+        </p>
         <p className="section-copy">
           A site with reusable content templates and a small set of renderings can
           start with one content type. A multilingual site with MVC renderings,
@@ -58,10 +66,16 @@ export default function SitecoreMigrationService() {
           redirect map before moving the domain.
         </p>
         <h3 className="h5">Does content migration include XP analytics and personalization?</h3>
-        <p className="section-copy mb-0">
+        <p className="section-copy">
           Scope those separately from pages and media. Inventory the reports,
           audiences, rules and integrations you still use, then decide which ones
           need a replacement before launch.
+        </p>
+        <h3 className="h5">Do existing XM Cloud sites need to migrate to SitecoreAI?</h3>
+        <p className="section-copy mb-0">
+          Sitecore says current XM Cloud customers can use SitecoreAI on their
+          existing platform. If you already run XM Cloud, scope changes around the
+          capabilities you need or improvements to your current frontend.
         </p>
       </section>
     </ServicePage>

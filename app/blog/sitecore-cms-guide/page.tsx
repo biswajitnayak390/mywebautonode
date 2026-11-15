@@ -6,7 +6,7 @@ const article = {
   title: "What Is Sitecore CMS? XP, XM, and XM Cloud Explained",
   description:
     "Compare Sitecore XP, XM, and XM Cloud (SitecoreAI). See how content authoring and headless delivery work and what changes during a migration.",
-  updated: "2026-11-14",
+  updated: "2026-11-15",
 };
 
 export const metadata = articleMetadata(article);
@@ -45,7 +45,7 @@ export default function SitecoreCmsGuidePage() {
             </tr>
             <tr>
               <th scope="row">XM Cloud</th>
-              <td>Sitecore’s SaaS content and page authoring product, now called SitecoreAI.</td>
+              <td>The SaaS content and page authoring foundation of SitecoreAI.</td>
               <td>Who owns the headless frontend and how will editors preview and publish?</td>
             </tr>
           </tbody>
@@ -74,8 +74,13 @@ export default function SitecoreCmsGuidePage() {
 
       <h2 className="h4 mt-4">Where to start with an upgrade or migration</h2>
       <p>
-        Pick one site and list the components, translations, redirects, forms, and
-        third-party integrations it depends on. Use the{" "}
+        Use the{" "}
+        <Link href="/blog/sitecore-xp-upgrade-vs-sitecoreai-migration">
+          XP upgrade and SitecoreAI migration comparison
+        </Link>{" "}
+        to choose a first step. If you decide to move, pick one site and list the
+        components, translations, redirects, forms, and integrations it depends on.
+        Use the{" "}
         <Link href="/blog/sitecore-xm-cloud-migration-checklist">
           Sitecore XP to XM Cloud migration checklist
         </Link>{" "}
@@ -95,9 +100,13 @@ export default function SitecoreCmsGuidePage() {
         </div>
       </div>
       <p className="small mt-4 mb-0">
-        Reference{" "}
+        References{" "}
         <a href="https://doc.sitecore.com/sai/en/developers/sitecoreai/experience-edge.html">
           Sitecore Experience Edge documentation
+        </a>{" "}
+        and{" "}
+        <a href="https://developers.sitecore.com/sitecoreai/faq">
+          SitecoreAI transition FAQ
         </a>.
       </p>
     </BlogArticle>

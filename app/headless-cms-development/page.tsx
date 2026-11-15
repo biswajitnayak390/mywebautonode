@@ -46,9 +46,10 @@ export default function HeadlessCmsDevelopmentPage() {
           before you move the rest of the site.
         </p>
         <p className="section-copy mb-0">
-          Use the{" "}
+          Use the URL test matrix in the{" "}
           <Link href="/blog/headless-cms-seo-checklist">Next.js headless CMS SEO checklist</Link>
-          {" "}for launch acceptance criteria. For an existing Sitecore
+          {" "}to agree which redirects, language pairs, and published pages to
+          verify before launch. For an existing Sitecore
           installation, see our{" "}
           <Link href="/sitecore-development">Sitecore development services</Link>.
         </p>

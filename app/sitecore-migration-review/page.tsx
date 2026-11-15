@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
 
-const title = "Free Sitecore Migration Review";
+const title = "Free Sitecore Migration Readiness Review";
 const description =
-  "Planning a move from Sitecore XP or XM to XM Cloud? Get an initial review of your migration options, risks, and next steps.";
+  "Considering a Sitecore XP upgrade or a move to SitecoreAI (XM Cloud)? Get an initial review of your publishing, integration, and URL migration risks.";
 
 export const metadata: Metadata = {
   title,
@@ -26,10 +26,11 @@ export default function SitecoreMigrationReviewPage() {
         <div className="row g-5 align-items-start">
           <div className="col-lg-6">
             <span className="eyebrow mb-3">Free initial review</span>
-            <h1 className="section-title mb-3">Planning a move to Sitecore XM Cloud?</h1>
+            <h1 className="section-title mb-3">Sitecore migration readiness review</h1>
             <p className="section-copy mb-4">
-              Share your current Sitecore setup and the decision you’re facing.
-              We’ll help you identify what to check before you scope the migration.
+              Share your Sitecore version, one representative website URL, and a
+              workflow or integration you need to keep. We’ll help you identify
+              what to check before you upgrade XP or move to SitecoreAI (XM Cloud).
             </p>
             <h2 className="h5 mb-3">What we’ll cover</h2>
             <ul className="section-copy ps-3 mb-4">
@@ -38,12 +39,13 @@ export default function SitecoreMigrationReviewPage() {
               <li>Which redirects and language URLs to plan for before launch.</li>
             </ul>
             <p className="mb-0">
-              For website owners and agency teams planning a Sitecore migration.
-              Use our{" "}
-              <Link href="/blog/sitecore-xm-cloud-migration-checklist">
-                migration checklist
+              Compare the{" "}
+              <Link href="/blog/sitecore-xp-upgrade-vs-sitecoreai-migration">
+                XP upgrade and SitecoreAI migration options
               </Link>{" "}
-              to see what to prepare before a review.
+              before the review. Use the{" "}
+              <Link href="/blog/sitecore-xm-cloud-migration-checklist">migration checklist</Link>{" "}
+              when you’re ready to inventory the site.
             </p>
           </div>
           <section className="col-lg-6" aria-labelledby="review-request-title">

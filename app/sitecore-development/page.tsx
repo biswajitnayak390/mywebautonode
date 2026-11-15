@@ -61,7 +61,8 @@ export default function SitecoreDevelopmentPage() {
         <ul className="section-copy ps-3 mb-0">
           <li><Link href="/blog/sitecore-nextjs-published-page-404">Diagnose a published Sitecore page returning 404 in Next.js</Link></li>
           <li><Link href="/blog/sitecore-cms-guide">Compare Sitecore XP, XM, and XM Cloud</Link></li>
-          <li><Link href="/sitecore-xm-cloud-development">Plan a Sitecore XM Cloud migration</Link></li>
+          <li><Link href="/blog/sitecore-xp-upgrade-vs-sitecoreai-migration">Decide between a Sitecore XP upgrade and a SitecoreAI migration</Link></li>
+          <li><Link href="/sitecore-xm-cloud-development">Explore SitecoreAI and XM Cloud migration services</Link></li>
         </ul>
       </section>
     </ServicePage>
