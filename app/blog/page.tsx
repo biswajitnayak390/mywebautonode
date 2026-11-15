@@ -4,10 +4,15 @@ import Link from "next/link";
 export const metadata = sitePageMetadata(
   "/blog",
   "Sitecore and Headless CMS Guides",
-  "Practical guides to moving Sitecore sites to XM Cloud, troubleshooting Next.js 404s, and launching headless CMS websites.",
+  "Compare Sitecore XP upgrades and SitecoreAI migrations, troubleshoot Next.js 404s, and test headless CMS websites before launch.",
 );
 
 const articles = [
+  {
+    href: "/blog/sitecore-xp-upgrade-vs-sitecoreai-migration",
+    title: "Sitecore XP Upgrade vs. SitecoreAI Migration",
+    description: "Compare an XP upgrade, a SitecoreAI pilot, and a phased move. Use a representative page to test the choice.",
+  },
   {
     href: "/blog/sitecore-xm-cloud-migration-estimate",
     title: "How to Estimate a Sitecore XP to XM Cloud Migration",
@@ -26,7 +31,7 @@ const articles = [
   {
     href: "/blog/headless-cms-seo-checklist",
     title: "Headless CMS SEO Checklist for Next.js",
-    description: "Verify what search engines receive across templates, languages, and campaign URLs.",
+    description: "Use a worked URL map to check redirects, canonicals, multilingual pages, and publishing before launch.",
   },
   {
     href: "/blog/sitecore-cms-guide",

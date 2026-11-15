@@ -9,7 +9,7 @@ const pages: { path: string; lastModified?: string }[] = [
   { path: "/contact", lastModified: "2026-11-15" },
   { path: "/sitecore-development", lastModified: "2026-11-15" },
   { path: "/sitecore-xm-cloud-development", lastModified: "2026-11-15" },
-  { path: "/sitecore-migration-review" },
+  { path: "/sitecore-migration-review", lastModified: "2026-11-15" },
   { path: "/headless-cms-development", lastModified: "2026-11-15" },
   { path: "/ai-chatbot-development", lastModified: "2026-11-15" },
   { path: "/ai-chatbot-websites", lastModified: "2026-11-14" },
@@ -17,9 +17,10 @@ const pages: { path: string; lastModified?: string }[] = [
   { path: "/blog", lastModified: "2026-11-15" },
   { path: "/blog/sitecore-cms-guide", lastModified: "2026-11-15" },
   { path: "/blog/sitecore-nextjs-published-page-404", lastModified: "2026-11-15" },
+  { path: "/blog/sitecore-xp-upgrade-vs-sitecoreai-migration", lastModified: "2026-11-15" },
   { path: "/blog/sitecore-xm-cloud-migration-checklist", lastModified: "2026-11-15" },
   { path: "/blog/sitecore-xm-cloud-migration-estimate", lastModified: "2026-11-15" },
-  { path: "/blog/headless-cms-seo-checklist", lastModified: "2026-11-14" },
+  { path: "/blog/headless-cms-seo-checklist", lastModified: "2026-11-15" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
