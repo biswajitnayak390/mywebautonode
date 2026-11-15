@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { type MouseEvent, useState } from "react";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -17,9 +17,10 @@ const navItems = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const openChatbot = () => {
-    const event = new CustomEvent("open-chatbot");
-    window.dispatchEvent(event);
+  const openChatbot = (event: MouseEvent<HTMLButtonElement>) => {
+    window.dispatchEvent(new CustomEvent("open-chatbot", {
+      detail: { origin: event.currentTarget, topic: "website" },
+    }));
     setMenuOpen(false);
   };
 
