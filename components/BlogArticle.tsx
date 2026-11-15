@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { articleCovers, articleCoverSize, articleCoverSlug } from "@/lib/article-covers";
 import { ORGANIZATION_ID, SITE_NAME, SITE_URL } from "@/lib/site";
 
 type ArticleDetails = {
@@ -11,7 +12,18 @@ type ArticleDetails = {
   updated?: string;
 };
 
+function articleImage({ path, title }: ArticleDetails) {
+  if (!Object.hasOwn(articleCovers, path)) return undefined;
+
+  return {
+    url: new URL(`/article-covers/${articleCoverSlug(path)}`, SITE_URL).href,
+    alt: title,
+    ...articleCoverSize,
+  };
+}
+
 export function articleMetadata(article: ArticleDetails): Metadata {
+  const image = articleImage(article);
   return {
     title: article.title,
     description: article.description,
@@ -24,11 +36,13 @@ export function articleMetadata(article: ArticleDetails): Metadata {
       siteName: SITE_NAME,
       publishedTime: article.published,
       modifiedTime: article.updated,
+      images: image ? [{ ...image, type: "image/png" }] : undefined,
     },
     twitter: {
-      card: "summary",
+      card: image ? "summary_large_image" : "summary",
       title: article.title,
       description: article.description,
+      images: image ? [{ url: image.url, alt: image.alt }] : undefined,
     },
   };
 }
@@ -45,12 +59,14 @@ export default function BlogArticle({
     dateStyle: "long",
     timeZone: "Asia/Kolkata",
   }).format(new Date(date));
+  const image = articleImage(details);
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: details.title,
     description: details.description,
     mainEntityOfPage: new URL(details.path, SITE_URL).href,
+    image: image ? [image.url] : undefined,
     author: {
       "@type": "Organization",
       "@id": ORGANIZATION_ID,
