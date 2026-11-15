@@ -35,6 +35,11 @@ export default function SitecoreMigrationService() {
           each dependency. Compare the cost of rebuilding a component with how
           often editors use it and what it contributes to the website.
         </p>
+        <p className="section-copy">
+          Use the{" "}
+          <Link href="/blog/sitecore-xm-cloud-migration-estimate">XP to XM Cloud migration estimation guide</Link>
+          {" "}to decide what should go into the estimate.
+        </p>
         <p className="section-copy mb-0">
           Bring your current Sitecore version, a few representative URLs, and
           the integrations that must keep working. Use the{" "}

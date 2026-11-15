@@ -9,6 +9,11 @@ export const metadata = sitePageMetadata(
 
 const articles = [
   {
+    href: "/blog/sitecore-xm-cloud-migration-estimate",
+    title: "How to Estimate a Sitecore XP to XM Cloud Migration",
+    description: "Use a pilot, reusable components, and integration checks to build a migration estimate.",
+  },
+  {
     href: "/blog/sitecore-nextjs-published-page-404",
     title: "Why a Published Sitecore Page Returns 404 in Next.js",
     description: "Find the cause by tracing the site name, language, published route, and frontend response.",
